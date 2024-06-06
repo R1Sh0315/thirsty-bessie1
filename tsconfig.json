@@ -8,7 +8,6 @@
       "module": "commonjs",
       "strict": true,
       "allowSyntheticDefaultImports": true,
-      "resolveJsonModule": true,
       "moduleResolution": "node",
       "baseUrl": "./src",
       "paths": {
