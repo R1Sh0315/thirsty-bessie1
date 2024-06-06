@@ -1,14 +1,20 @@
 {
-    "include": [
-        "./src/**/*"
-    ],
+  "include": ["./src/**/*"],
+  {
     "compilerOptions": {
-        "strict": true,
-        "esModuleInterop": true,
-        "lib": [
-            "dom",
-            "es2015"
-        ],
-        "jsx": "react-jsx"
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "target": "es5",
+      "module": "commonjs",
+      "strict": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "moduleResolution": "node",
+      "baseUrl": "./src",
+      "paths": {
+        "*": ["types/*"]
+      }
     }
+  }
+  
 }

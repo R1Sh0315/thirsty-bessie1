@@ -1,0 +1,195 @@
+{
+  "Experience": [
+    {
+      "icon": "/src/utility/prodapt-logo.svg",
+      "companyName": "Prodapt",
+      "yearOfWork": "2021 - present",
+      "designation": "Software Engineer | Frontend Developer",
+      "workDiscription": " I've spent almost 2.5+ years delivering innovative web solutions. Proficient in modern frontend technologies, I've collaborated on diverse projects, ensuring high-quality code, responsive designs, and seamless user experiences. Passionate about continuous learning, I've contributed to team success through effective problem-solving and communication skills.",
+      "url": "https://www.prodapt.com/"
+    }
+  ],
+  "Qualification": [
+    {
+      "icon": "/src/utility/newtonschool-logo.PNG",
+      "collegeName": "Newton School",
+      "yearOfWork": "2020 - 2021",
+      "qualificationIn": "Full Stack Development",
+      "workDiscription": " Experienced in IT and frontend development. Completed NewtonSchool full-stack course, mastering various technologies for robust application development and effective problem-solving.",
+      "url": "https://www.newtonschool.co",
+      "certificate": [
+        {
+          "name": "Newtonschool Certificate",
+          "url": "https://my.newtonschool.co/course/4nka5y7k801q/certificate/fixickg8lmhy/verify"
+        }
+      ]
+    },
+    {
+      "icon": "/src/utility/nmiet-logo.PNG",
+      "collegeName": "NMIET",
+      "yearOfWork": "2017 - 2020",
+      "qualificationIn": "Mechanical Engineering",
+      "workDiscription": "Mechanical engineering graduate with strong IT skills and expertise in frontend coding and UI/UX design. Passionate about merging technical knowledge with creative design to deliver exceptional user experiences.",
+      "url": "https://www.nmiet.edu.in/"
+    },
+    {
+      "icon": "/src/utility/dy-patil-logo.svg",
+      "collegeName": "DY Patil Polytechnic",
+      "yearOfWork": "2014 - 2017",
+      "qualificationIn": "Mechanical Engineering",
+      "workDiscription": "Diploma in Mechanical Engineering with proficient IT and frontend coding skills. Adept in merging engineering principles with technological expertise for innovative solutions. Passionate about leveraging cross-disciplinary knowledge for impactful projects.",
+      "url": "https://dypatiluniversitypune.edu.in/"
+    }
+  ],
+  "Discription": [
+    {
+      "label": "JS",
+      "url": "https://www.w3schools.com/js/",
+      "disc": "High-level, interpreted, dynamic, prototype-based, scripting, multi-paradigm, first-class functions, supports object-oriented, imperative, declarative, functional programming."
+    },
+    {
+      "label": "HTML",
+      "url": "https://www.w3schools.com/html/",
+      "disc": "Create a gradient-filled circle with SVG, using linearGradient and circle elements."
+    },
+    {
+      "label": "CSS",
+      "url": "https://www.w3schools.com/css/",
+      "disc": "CSS styles webpage appearance; controls layout, colors, fonts, sizes, and animations."
+    },
+    {
+      "label": "nodejs",
+      "url": "https://www.w3schools.com/nodejs/",
+      "disc": "Node.js is a JavaScript runtime that executes server-side code for web applications."
+    },
+    {
+      "label": "mongodb",
+      "url": "https://www.w3schools.com/mongodb/",
+      "disc": "Flexible, scalable NoSQL database. Document-oriented. JSON-like documents. Widely used in modern applications."
+    },
+    {
+      "label": "ReactJs",
+      "url": "https://legacy.reactjs.org/docs/getting-started.html",
+      "disc": "React.js is a declarative, efficient, and flexible JavaScript library for building user interfaces, developed by Facebook."
+    },
+    {
+      "label": "Angular",
+      "url": "https://angular.io/guide/architecture",
+      "disc": "Angular is a popular open-source web application framework maintained by Google, known for its robustness, scalability, and extensive features for building dynamic single-page applications (SPAs) using TypeScript."
+    }
+  ],
+  "ResumePath": "/src/utility/files/18JAN24.pdf",
+  "Achievement": [
+    {
+      "name": "Python basic",
+      "url": "https://www.hackerrank.com/certificates/c6933ce56d55",
+      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "skills": ["Python"],
+      "description": "Versatile, expressive, high-level, interpreted, dynamic, object-oriented, powerful, readable, community-driven, widely-used."
+    },
+
+    {
+      "name": "Scientific computing with python",
+      "url": "https://www.freecodecamp.org/certification/fccbdc3cd9d-99cb-4c8e-9592-d622b6811319/scientific-computing-with-python-v7",
+      "icon": "https://media.licdn.com/dms/image/C4E0BAQGLKj3JHcof0w/company-logo_200_200/0/1630639684997/free_code_camp_logo?e=1717027200&v=beta&t=fnvmod64otUkTLyhCb6UmKQJOHazmP0L-yerzueM4QA",
+      "skills": ["Python"],
+      "description": "Versatile, expressive, high-level, interpreted, dynamic, object-oriented, powerful, readable, community-driven, widely-used."
+    },
+    {
+      "name": "Introduction to cyber security learing path",
+      "url": "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-KU5TSEVJDI.png",
+      "icon": "https://media.licdn.com/dms/image/C4D0BAQHbrQNn-KIK_g/company-logo_200_200/0/1630569839004?e=1717027200&v=beta&t=bRecEpBEW_y--V2oznWawOPwyjDmASVX3INx6qLyE_E",
+      "skills": ["Cyber security"],
+      "description": "Introduction to cybersecurity: Protecting digital systems from unauthorized access."
+    },
+    {
+      "name": "Javascript basic",
+      "url": "https://www.hackerrank.com/certificates/8c20a8facb9b",
+      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "skills": ["Javascript"],
+      "description": "JavaScript is a versatile, dynamic, interpreted programming language."
+    },
+    {
+      "name": "SQL basic",
+      "url": "https://www.hackerrank.com/certificates/f78640064628",
+      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "skills": ["Javascript"],
+      "description": "JavaScript is a versatile, dynamic, interpreted programming language."
+    },
+    {
+      "name": "Angular basic",
+      "url": "https://www.hackerrank.com/certificates/b95a1d0b2491",
+      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "skills": ["Angular", "Typescript"],
+      "description": "Angular is a TypeScript-based framework for building web applications."
+    },
+    {
+      "name": "Nodejs basic",
+      "url": "https://www.hackerrank.com/certificates/cb08d6d7d40e",
+      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "skills": ["Javascript, nodejs"],
+      "description": "Node.js is a JavaScript runtime built on Chrome's V8 engine."
+    },
+    {
+      "name": "Javascript intermidiate",
+      "url": "https://www.hackerrank.com/certificates/e72f10e5e062",
+      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "skills": ["Javascript"],
+      "description": "JavaScript is a versatile, dynamic, interpreted programming language."
+    },
+    {
+      "name": "Frontend Developer (React) Certificate",
+      "url": "https://www.hackerrank.com/certificates/4c7e4580cf05",
+      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "skills": ["HTML", "CSS", "Javascript", "reactJs"],
+      "description": "React is a JavaScript library for building user interfaces efficiently."
+    }
+  ],
+  "Pojects": [
+    {
+      "name": "Pet Info",
+      "description": "Create a website showcasing dog breeds categorized by type and country. With help of React",
+      "icon": "",
+      "link": "https://csb-w929yu-43ygiwe4w-r1sh0315.vercel.app/",
+      "skills": ["HTML", "CSS", "Javascript", "react"],
+      "figma": "",
+      "gitLink": "https://github.com/R1Sh0315/pet-info"
+    },
+    {
+      "name": "Postal Index number data",
+      "description": "Search by post index or branch name to display country, circle, region, division, branch, type, and name information",
+      "icon": "",
+      "link": "https://csb-4y5ol2-aul55rjj6-r1sh0315.vercel.app/",
+      "skills": ["HTML", "CSS", "Javascript", "react"],
+      "figma": "",
+      "gitLink": "https://github.com/R1Sh0315/pstal-index-number-by-react-v01"
+    },
+    {
+      "name": "Simple Calender",
+      "description": "Simple React calendar component for displaying dates",
+      "icon": "",
+      "link": "https://react-calender-v01.vercel.app/",
+      "skills": ["HTML", "CSS", "Javascript", "react"],
+      "figma": "",
+      "gitLink": "https://github.com/R1Sh0315/react-calender-v01"
+    },
+    {
+      "name": "Chat Application",
+      "description": "Chat application. Features: Will show who had joined and left the chat group with real-time enveroment. Socket.io is used to create a secure bridge between 2 clients and servers",
+      "icon": "",
+      "link": "",
+      "skills": ["HTML", "CSS", "Javascript", "react", "nodejs", "Socket.io"],
+      "figma": "",
+      "gitLink": "https://github.com/R1Sh0315/chat-application"
+    },
+    {
+      "name": "Video Search Engine",
+      "description": "Search engine using YouTube API to display music videos exclusively, providing a tailored music video browsing experience",
+      "icon": "",
+      "link": "",
+      "skills": ["HTML", "CSS", "Javascript"],
+      "figma": "https://www.figma.com/file/8vH8VWTs3XFJWaP8QmKDHW/search-Engine?type=design&node-id=0-1&mode=design&t=U1HU0J9tmyUioTpb-0",
+      "gitLink": "https://github.com/R1Sh0315/youtube-search-eng-v01"
+    }
+  ]
+}
