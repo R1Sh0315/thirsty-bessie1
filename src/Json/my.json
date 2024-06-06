@@ -91,56 +91,56 @@
     {
       "name": "Scientific computing with python",
       "url": "https://www.freecodecamp.org/certification/fccbdc3cd9d-99cb-4c8e-9592-d622b6811319/scientific-computing-with-python-v7",
-      "icon": "https://media.licdn.com/dms/image/C4E0BAQGLKj3JHcof0w/company-logo_200_200/0/1630639684997/free_code_camp_logo?e=1717027200&v=beta&t=fnvmod64otUkTLyhCb6UmKQJOHazmP0L-yerzueM4QA",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
       "skills": ["Python"],
       "description": "Versatile, expressive, high-level, interpreted, dynamic, object-oriented, powerful, readable, community-driven, widely-used."
     },
     {
       "name": "Introduction to cyber security learing path",
       "url": "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-KU5TSEVJDI.png",
-      "icon": "https://media.licdn.com/dms/image/C4D0BAQHbrQNn-KIK_g/company-logo_200_200/0/1630569839004?e=1717027200&v=beta&t=bRecEpBEW_y--V2oznWawOPwyjDmASVX3INx6qLyE_E",
+      "icon": "https://assets.tryhackme.com/img/THMlogo.png",
       "skills": ["Cyber security"],
       "description": "Introduction to cybersecurity: Protecting digital systems from unauthorized access."
     },
     {
       "name": "Javascript basic",
       "url": "https://www.hackerrank.com/certificates/8c20a8facb9b",
-      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
       "skills": ["Javascript"],
       "description": "JavaScript is a versatile, dynamic, interpreted programming language."
     },
     {
       "name": "SQL basic",
       "url": "https://www.hackerrank.com/certificates/f78640064628",
-      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
-      "skills": ["Javascript"],
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sql_data_base_with_logo.png/800px-Sql_data_base_with_logo.png?20210130181641",
+      "skills": ["SQL"],
       "description": "JavaScript is a versatile, dynamic, interpreted programming language."
     },
     {
       "name": "Angular basic",
       "url": "https://www.hackerrank.com/certificates/b95a1d0b2491",
-      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/768px-Angular_full_color_logo.svg.png",
       "skills": ["Angular", "Typescript"],
       "description": "Angular is a TypeScript-based framework for building web applications."
     },
     {
       "name": "Nodejs basic",
       "url": "https://www.hackerrank.com/certificates/cb08d6d7d40e",
-      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/590px-Node.js_logo.svg.png?20170401104355",
       "skills": ["Javascript, nodejs"],
       "description": "Node.js is a JavaScript runtime built on Chrome's V8 engine."
     },
     {
       "name": "Javascript intermidiate",
       "url": "https://www.hackerrank.com/certificates/e72f10e5e062",
-      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
       "skills": ["Javascript"],
       "description": "JavaScript is a versatile, dynamic, interpreted programming language."
     },
     {
       "name": "Frontend Developer (React) Certificate",
       "url": "https://www.hackerrank.com/certificates/4c7e4580cf05",
-      "icon": "https://media.licdn.com/dms/image/D560BAQE8MivsmbT7Ig/company-logo_200_200/0/1705561459405/hackerrank_logo?e=1717027200&v=beta&t=2koigfjY6kyQRmyAmCW9J_p4pJd0bCJ9AqWZdJYNz_Q",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/768px-React-icon.svg.png?20220125121207",
       "skills": ["HTML", "CSS", "Javascript", "reactJs"],
       "description": "React is a JavaScript library for building user interfaces efficiently."
     }
