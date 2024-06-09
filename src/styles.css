@@ -38,9 +38,8 @@ a {
   border-radius: 17px;
   margin: 2px;
   background: #0d9276;
-  color: #0f1035;
+  color: #242424;
   font-weight: 700;
-  opacity: 0.4;
 }
 .pill-container:hover {
   background: #0d9276;
@@ -585,10 +584,10 @@ strong {
 }
 
 .tl-icon-contianer {
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 24px;
   display: flex;
-  background: white;
+  /* background: white; */
   width: fit-content;
   height: 25px;
 }
@@ -888,6 +887,15 @@ a {
   font-size: 15pt;
   padding: 0 4px;
   color: #39a7ff;
+}
+
+.tl-a {
+  display: flex;
+  align-items: center;
+}
+.tl-acc-icon {
+  margin: 5px 5px;
+  color: #ff004d;
 }
 
 @media screen and (max-width: 1200px) {

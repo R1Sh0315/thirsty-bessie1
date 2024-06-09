@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PillComponent from "./Pill-Component";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import SchoolIcon from "@mui/icons-material/School";
 
 interface IData {
   [key: string]: any;
@@ -30,8 +32,8 @@ const TimeLineComponent: React.FC<ITimeline> = ({
     return val === data.length - 1 && val !== 0
       ? "end"
       : val === 0
-      ? "initial"
-      : "mid";
+        ? "initial"
+        : "mid";
   };
 
   const tlElement = data.map((li: any, key: number) => (
@@ -41,11 +43,16 @@ const TimeLineComponent: React.FC<ITimeline> = ({
         istoggle ? "-reverse" : ""
       }`}
     >
+      {console.log(key, "key")}
       <div className={`time-line-cell-1${istoggle ? "-reverse" : ""}`}>
         <div className="time-line-cell-1-container">
           <div className="tl-icon-contianer">
-            <a href={li?.url} target="_blank">
-              <img className="tl-icon" src={li?.icon} alt="test" />
+            <a className="tl-a" href={li?.url} target="_blank">
+              {li?.isWorkingPlace ? (
+                <WorkOutlineIcon className="tl-acc-icon" />
+              ) : (
+                <SchoolIcon className="tl-acc-icon" />
+              )}
             </a>
           </div>
           <div className="tl-com-ins-name">
@@ -61,8 +68,8 @@ const TimeLineComponent: React.FC<ITimeline> = ({
               cellFormating(key) == "initial"
                 ? "no-dash"
                 : cellFormating(key) == "mid"
-                ? "dash"
-                : "dash"
+                  ? "dash"
+                  : "dash"
             }`}
           ></div>
           <div className={`${cellFormating(key)}-stage-core`}>
@@ -73,8 +80,8 @@ const TimeLineComponent: React.FC<ITimeline> = ({
               cellFormating(key) == "initial"
                 ? "dash"
                 : cellFormating(key) == "mid"
-                ? "dash"
-                : "no-dash"
+                  ? "dash"
+                  : "no-dash"
             }`}
           ></div>
         </div>

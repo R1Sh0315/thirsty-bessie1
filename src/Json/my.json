@@ -6,11 +6,13 @@
       "yearOfWork": "2021 - present",
       "designation": "Software Engineer | Frontend Developer",
       "workDiscription": " I've spent almost 2.5+ years delivering innovative web solutions. Proficient in modern frontend technologies, I've collaborated on diverse projects, ensuring high-quality code, responsive designs, and seamless user experiences. Passionate about continuous learning, I've contributed to team success through effective problem-solving and communication skills.",
-      "url": "https://www.prodapt.com/"
+      "url": "https://www.prodapt.com/",
+      "isWorkingPlace": true
     }
   ],
   "Qualification": [
     {
+      "isWorkingPlace": false,
       "icon": "/src/utility/newtonschool-logo.PNG",
       "collegeName": "Newton School",
       "yearOfWork": "2020 - 2021",
@@ -25,6 +27,7 @@
       ]
     },
     {
+      "isWorkingPlace": false,
       "icon": "/src/utility/nmiet-logo.PNG",
       "collegeName": "NMIET",
       "yearOfWork": "2017 - 2020",
@@ -33,6 +36,7 @@
       "url": "https://www.nmiet.edu.in/"
     },
     {
+      "isWorkingPlace": false,
       "icon": "/src/utility/dy-patil-logo.svg",
       "collegeName": "DY Patil Polytechnic",
       "yearOfWork": "2014 - 2017",
