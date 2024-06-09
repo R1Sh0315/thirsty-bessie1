@@ -37,14 +37,14 @@ const AboutCardComponent: React.FC<IACard> = ({ isDark }) => {
   }, []);
 
   const handleDownload = () => {
-    const resume = jsonData.ResumePath;
+    const resumePath = `${process.env.PUBLIC_URL}/rishikesh-resume.pdf`;
     const link = document.createElement("a");
-    link.href = resume;
+    link.href = resumePath;
     link.download = "rishiekshResume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    window.open(resume, "_blank");
+    window.open(resumePath, "_blank");
   };
 
   return (
@@ -54,8 +54,8 @@ const AboutCardComponent: React.FC<IACard> = ({ isDark }) => {
       </div>
       <div className={`about-me ${isDark ? "am-dark" : "am-light"}`}>
         I'm <span className="ac-name"> Rishikesh Bhalekar </span> a web &
-        applications
-        <DisplayWordsComponent words={words} />
+        applications Developer
+        {/* <DisplayWordsComponent words={words} /> */}
       </div>
       <div className="about-card-detail-container">
         <NoteComponent

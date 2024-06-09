@@ -82,7 +82,7 @@
       "disc": "Angular is a popular open-source web application framework maintained by Google, known for its robustness, scalability, and extensive features for building dynamic single-page applications (SPAs) using TypeScript."
     }
   ],
-  "ResumePath": "/src/utility/files/18JAN24.pdf",
+  "ResumePath": "./src/utility/files/18JAN24.pdf",
   "Achievement": [
     {
       "name": "Python basic",
