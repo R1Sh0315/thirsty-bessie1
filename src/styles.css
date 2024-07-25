@@ -637,17 +637,13 @@ strong {
 }
 
 .dd-option-unhide {
-  transition:
-    height 0.7s ease,
-    opacity 0.7s ease;
+  transition: height 0.7s ease, opacity 0.7s ease;
   height: auto;
   opacity: 1;
 }
 
 .dd-option-hide {
-  transition:
-    height 0.7s ease,
-    opacity 0.7s ease;
+  transition: height 0.7s ease, opacity 0.7s ease;
   height: 0;
   opacity: 0;
 }
@@ -896,6 +892,13 @@ a {
 .tl-acc-icon {
   margin: 5px 5px;
   color: #ff004d;
+}
+
+.update-content {
+  text-align: end;
+  padding: 0 14px;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 @media screen and (max-width: 1200px) {

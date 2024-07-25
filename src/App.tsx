@@ -21,7 +21,17 @@ export default function App() {
   };
   const navList = ["About", "Skills", "Experience", "Project", "Resume"];
   const [isDarkMode, setDarkMode] = useState(false);
+  const [lastUpdateDate, setLastUpdateDate] = useState("");
   const achivementData = jsonData.Achievement;
+
+  useEffect(() => {
+    fetch("https://api.github.com/repos/R1Sh0315/thirsty-bessie1")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Last updated date:", data.updated_at);
+        setLastUpdateDate(data.updated_at);
+      });
+  }, []);
 
   return (
     <div className={`App ${isDarkMode ? "dark-mode" : "light-mode"}`}>
@@ -47,6 +57,7 @@ export default function App() {
         isDark={isDarkMode}
         label="Licenses & certifications"
       />
+      <div className="update-content">Last updated date: {lastUpdateDate}</div>
     </div>
   );
 }
