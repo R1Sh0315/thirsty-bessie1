@@ -15,7 +15,8 @@
       "yearOfWork": "2024 - present",
       "designation": "Software Engineer | Frontend Developer",
       "workDiscription": "Working as React developer and various project with various technologies like for state management using recoil and for styling MaterialUI with logic building.",
-      "url": "https://kanakasoftware.com/"
+      "url": "https://kanakasoftware.com/",
+      "isWorkingPlace": true
     }
   ],
   "Qualification": [
