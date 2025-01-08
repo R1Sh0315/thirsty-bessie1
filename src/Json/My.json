@@ -3,10 +3,18 @@
     {
       "icon": "/src/utility/prodapt-logo.svg",
       "companyName": "Prodapt",
-      "yearOfWork": "2021 - present",
+      "yearOfWork": "2021 - 2024",
       "designation": "Software Engineer | Frontend Developer",
-      "workDiscription": " I've spent almost 2.5+ years delivering innovative web solutions. Proficient in modern frontend technologies, I've collaborated on diverse projects, ensuring high-quality code, responsive designs, and seamless user experiences. Passionate about continuous learning, I've contributed to team success through effective problem-solving and communication skills.",
+      "workDiscription": " I've spent almost 3.3+ years delivering innovative web solutions. Proficient in modern frontend technologies, I've collaborated on diverse projects, ensuring high-quality code, responsive designs, and seamless user experiences. Passionate about continuous learning, I've contributed to team success through effective problem-solving and communication skills.",
       "url": "https://www.prodapt.com/"
+    },
+    {
+      "icon": "https://media.licdn.com/dms/image/v2/C4E0BAQHyQtr04D3ekw/company-logo_200_200/company-logo_200_200/0/1631352477663?e=1744243200&v=beta&t=z1XX5rEGHv2W3XD4Yb3xlgaD9u5r-Cqy7zVX_sScVCU",
+      "companyName": "Kanaka",
+      "yearOfWork": "2024 - present",
+      "designation": "Software Engineer | Frontend Developer",
+      "workDiscription": "Working as React developer and various project with various technologies like for state management using recoil and for styling MaterialUI with logic building.",
+      "url": "https://kanakasoftware.com/"
     }
   ],
   "Qualification": [
