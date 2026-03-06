@@ -24,6 +24,7 @@ interface RepoContribution {
         url: string;
         date: string;
         type: "PR" | "Issue" | "Commit";
+        status?: "open" | "closed" | "merged";
     }>;
 }
 
@@ -83,22 +84,35 @@ const ContributionsComponent: React.FC<IContributions> = ({ isDark, label }) => 
                             const isMerged = !!pr.merged;
                             const action = String(payload.action).toLowerCase();
 
-                            if (action === "closed" && isMerged) {
-                                group.mergedPRs++;
-                                group.items.push({
-                                    id: String(pr.id || Math.random()),
-                                    title: pr.title || "Merged Pull Request",
-                                    url: pr.html_url || "#",
-                                    date: formatDate(pr.merged_at || event.created_at),
-                                    type: "PR",
-                                });
-                            } else if (action === "opened") {
+                            if (action === "closed") {
+                                if (isMerged) {
+                                    group.mergedPRs++;
+                                    group.items.push({
+                                        id: String(pr.id || Math.random()),
+                                        title: pr.title || "Merged Pull Request",
+                                        url: pr.html_url || "#",
+                                        date: formatDate(pr.merged_at || event.created_at),
+                                        type: "PR",
+                                        status: "merged",
+                                    });
+                                } else {
+                                    group.items.push({
+                                        id: String(pr.id || Math.random()),
+                                        title: pr.title || "Closed Pull Request",
+                                        url: pr.html_url || "#",
+                                        date: formatDate(pr.closed_at || event.created_at),
+                                        type: "PR",
+                                        status: "closed",
+                                    });
+                                }
+                            } else if (action === "opened" || action === "reopened") {
                                 group.items.push({
                                     id: String(pr.id || Math.random()),
                                     title: pr.title || "Opened Pull Request",
                                     url: pr.html_url || "#",
                                     date: formatDate(pr.created_at || event.created_at),
                                     type: "PR",
+                                    status: "open",
                                 });
                             }
                         } else if (event.type === "PushEvent") {
@@ -117,12 +131,16 @@ const ContributionsComponent: React.FC<IContributions> = ({ isDark, label }) => 
                             });
                         } else if (event.type === "IssuesEvent" && payload.issue) {
                             const issue = payload.issue;
+                            const action = String(payload.action).toLowerCase();
+                            const status: "open" | "closed" = (action === "closed") ? "closed" : "open";
+
                             group.items.push({
                                 id: String(issue.id || Math.random()),
                                 title: issue.title || "Issue resolution",
                                 url: issue.html_url || "#",
                                 date: formatDate(issue.created_at || event.created_at),
                                 type: "Issue",
+                                status: status,
                             });
                         }
                     } catch (eventError) {
@@ -187,13 +205,13 @@ const ContributionsComponent: React.FC<IContributions> = ({ isDark, label }) => 
 
                                 <ul className="contributions-list">
                                     {repo.items.slice(0, 10).map((item, idx) => (
-                                        <li key={idx} className="contribution-item">
+                                        <li key={idx} className={`contribution-item ${item.status || "commit"}`}>
                                             <a href={item.url} target="_blank" rel="noreferrer">
                                                 <span className="item-title">
                                                     #{idx + 1} — {item.title}
                                                 </span>
                                                 <span className="item-meta">
-                                                    {item.type} at: {item.date}
+                                                    {item.status ? item.status.toUpperCase() : item.type} at: {item.date}
                                                 </span>
                                             </a>
                                         </li>

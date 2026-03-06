@@ -41,6 +41,7 @@ a {
   color: #242424;
   font-weight: 700;
 }
+
 .pill-container:hover {
   background: #0d9276;
   opacity: 0.8;
@@ -100,6 +101,7 @@ a {
   font-size: 26pt;
   font-weight: 900;
 }
+
 .name:hover,
 .designation:hover,
 .whoami:hover {
@@ -172,6 +174,7 @@ a {
   /* opacity: 0.5; */
   color: #f4f4f4;
 }
+
 .bg-n-light {
   background-color: #f7f6f2;
 }
@@ -181,6 +184,7 @@ a {
   padding: 0px 6px;
   font-weight: 600;
 }
+
 .title-background {
   font-size: 33pt;
   font-weight: 900;
@@ -193,6 +197,7 @@ a {
 .tb-dark {
   color: rgba(255, 255, 255, 0.05);
 }
+
 .tb-light {
   color: rgba(0, 0, 0, 0.07);
 }
@@ -200,6 +205,7 @@ a {
 .am-dark {
   color: #f4f4f4;
 }
+
 .am-light {
   color: #242424;
 }
@@ -208,6 +214,7 @@ a {
   display: block;
   height: 67px;
 }
+
 .title-label {
   height: 67px;
   position: absolute;
@@ -259,6 +266,7 @@ a {
   box-shadow: 0 8px 32px 0 rgba(57, 167, 255, 0.1);
   transition: 0.5s ease-out;
 }
+
 .download-resume:hover {
   background-color: #39a7ff;
   color: rgb(255 255 255);
@@ -378,8 +386,8 @@ strong {
   border: #39a7ff;
 }
 
-.secondary-btn {
-}
+.secondary-btn {}
+
 .ghost-btn {
   background-color: transparent;
 }
@@ -410,6 +418,7 @@ strong {
   display: flex;
   flex-direction: row;
 }
+
 .vertical-timeline-reverse {
   display: flex;
   flex-direction: row-reverse;
@@ -443,6 +452,7 @@ strong {
   display: flex;
   justify-content: center;
 }
+
 .core {
   background-color: #ff004d;
   display: flex;
@@ -454,6 +464,7 @@ strong {
   height: 12px;
   width: 12px;
 }
+
 .initial-stage-dash,
 .mid-stage-dash,
 .end-stage-dash {
@@ -480,6 +491,7 @@ strong {
   justify-content: flex-end;
   align-items: center;
 }
+
 .time-line-cell-1-reverse {
   /* border: 1px solid white; */
   width: 48%;
@@ -487,6 +499,7 @@ strong {
   justify-content: flex-start;
   align-items: center;
 }
+
 .time-line-cell-1-container {
   /* border: 1px solid white; */
   margin: 0 13px;
@@ -519,6 +532,7 @@ strong {
 .yexp {
   font-size: 70pt;
 }
+
 .mexp,
 .dot {
   font-size: 30pt;
@@ -555,22 +569,19 @@ strong {
   color: #39a7ff;
   font-weight: 600;
 }
+
 .pb-fill-bg-primary {
-  background-image: linear-gradient(
-    90deg,
-    rgba(178, 220, 249, 1) 0%,
-    rgba(111, 191, 255, 1) 49%,
-    rgba(57, 167, 255, 1) 100%
-  );
+  background-image: linear-gradient(90deg,
+      rgba(178, 220, 249, 1) 0%,
+      rgba(111, 191, 255, 1) 49%,
+      rgba(57, 167, 255, 1) 100%);
 }
 
 .pb-fill-bg-secondary {
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 155, 209, 0.8856792717086834) 49%,
-    rgba(247, 39, 152, 1) 100%
-  );
+  background-image: linear-gradient(90deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 155, 209, 0.8856792717086834) 49%,
+      rgba(247, 39, 152, 1) 100%);
 }
 
 .pb-contianer {
@@ -713,8 +724,7 @@ strong {
   margin: 0 5px;
 }
 
-.DPB-contianer {
-}
+.DPB-contianer {}
 
 .DPB-label {
   /* position: relative; */
@@ -752,6 +762,7 @@ strong {
   align-items: center;
   padding: 5px 10px;
 }
+
 .cer-card:hover {
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
@@ -785,6 +796,7 @@ a {
   margin: 4px;
   position: relative;
 }
+
 .project-card-container:hover {
   box-shadow: 0px 3px 6px 0px rgba(31, 38, 135, 0.37);
 }
@@ -828,9 +840,11 @@ a {
 .figma-icon {
   padding: 5px;
 }
+
 .source-code {
   padding: 5px;
 }
+
 .git-link {
   padding: 5px 0;
 }
@@ -839,6 +853,7 @@ a {
   width: 100%;
   text-align: end;
 }
+
 .git-icon {
   height: 50px !important;
   font-size: 50pt !important;
@@ -867,6 +882,7 @@ a {
   position: relative;
   display: flex;
 }
+
 .git-container {
   border-left: 6px solid;
   left: 172px;
@@ -879,6 +895,7 @@ a {
   font-size: 13pt;
   font-weight: 600;
 }
+
 .git-username {
   font-size: 15pt;
   padding: 0 4px;
@@ -889,6 +906,7 @@ a {
   display: flex;
   align-items: center;
 }
+
 .tl-acc-icon {
   margin: 5px 5px;
   color: #ff004d;
@@ -905,12 +923,14 @@ a {
   .project-content {
     grid-template-columns: auto auto;
   }
+
   .project-card-container {
     width: 415px;
   }
 }
 
 @media screen and (max-width: 800px) {
+
   .row-1,
   .row-2 {
     display: flex;
@@ -920,6 +940,7 @@ a {
   .project-content {
     grid-template-columns: auto;
   }
+
   .project-card-container {
     width: 284px;
   }
@@ -948,9 +969,11 @@ a {
     display: block;
     text-align: left;
   }
+
   .ac-name {
     font-size: 10pt;
   }
+
   .about-in-detail {
     display: flex;
     flex-direction: column;
@@ -962,6 +985,7 @@ a {
     position: relative;
     margin: 0 0 67px 0;
   }
+
   .experience-container {
     width: 100%;
     height: 100%;
@@ -971,9 +995,11 @@ a {
     display: flex;
     flex-direction: column;
   }
+
   .pb-label {
     padding-bottom: 19px;
   }
+
   .DPB-container,
   .donut-container {
     width: 100%;
@@ -982,6 +1008,7 @@ a {
   .donut-container {
     margin: 10px 0;
   }
+
   .sub-component {
     margin: 0;
   }
@@ -989,20 +1016,24 @@ a {
   .sub-in-detail {
     margin: 0 26px 19px 0;
   }
+
   .skill-summary {
     width: 100%;
     text-align: justify;
     font-size: 400;
     margin: 14px 0;
   }
+
   .skill-disc-panel {
     width: 97%;
   }
+
   .bg-container-dark,
   .bg-container-light {
     flex-direction: column;
     border: none;
   }
+
   .exp-content {
     top: 35px;
     margin: 77px 25px 40px 0px;
@@ -1011,10 +1042,12 @@ a {
   .time-line-cell-2 {
     display: none;
   }
+
   .tl-work-dis {
     font-size: 7pt;
     text-align: left;
   }
+
   .tl-qul-des {
     font-size: 9pt;
   }
@@ -1022,12 +1055,15 @@ a {
   .tl-com-ins-name {
     font-size: 10pt;
   }
+
   .tl-year-container {
     font-size: 7pt;
   }
+
   .time-line-cell-1 {
     width: 38%;
   }
+
   .time-line-cell-3 {
     width: 62%;
   }
@@ -1052,9 +1088,11 @@ a {
   .cer-card {
     width: 100%;
   }
+
   .car-name {
     font-size: 9pt;
   }
+
   .car-skill {
     font-size: 7pt;
   }
@@ -1063,6 +1101,7 @@ a {
     width: 100px;
     height: 100px;
   }
+
   .achi-content {
     padding-top: 115px;
   }
@@ -1090,7 +1129,7 @@ a {
   flex-wrap: wrap;
   padding: 80px 25px 25px 25px;
   gap: 20px;
-  justify-content: center;
+  flex-direction: row;
 }
 
 .contribution-card {
@@ -1205,7 +1244,23 @@ a {
 .contribution-item {
   margin-bottom: 12px;
   padding-left: 10px;
-  border-left: 2px solid #39a7ff;
+  border-left: 3px solid #39a7ff;
+}
+
+.contribution-item.open {
+  border-left-color: #238636;
+}
+
+.contribution-item.closed {
+  border-left-color: #da3633;
+}
+
+.contribution-item.merged {
+  border-left-color: #8957e5;
+}
+
+.contribution-item.commit {
+  border-left-color: #39a7ff;
 }
 
 .contribution-item a {
