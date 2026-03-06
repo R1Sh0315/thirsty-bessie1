@@ -19,7 +19,6 @@ interface IProject {
 }
 
 const ProjectComponent: React.FC<IProject> = ({ label, url, isDark, data }) => {
-  console.log(data);
 
   const projectCard = data.map((el: any, key: number) => (
     <div className="project-card-container" key={key}>
@@ -65,7 +64,9 @@ const ProjectComponent: React.FC<IProject> = ({ label, url, isDark, data }) => {
             )}
           </div>
           <div className="skills-pill-container">
-            {el?.skills.map((skill: any) => <PillComponent label={skill} />)}
+            {el?.skills.map((skill: any, idx: number) => (
+              <PillComponent key={idx} label={skill} />
+            ))}
           </div>
         </div>
       </div>

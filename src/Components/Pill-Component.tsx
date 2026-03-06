@@ -9,9 +9,13 @@ interface IPill {
 const PillComponent: React.FC<IPill> = ({ label, url, icon }) => {
   return (
     <>
-      <a href={url} target="_blank">
+      {url ? (
+        <a href={url} target="_blank" rel="noreferrer">
+          <div className="pill-container">{label}</div>
+        </a>
+      ) : (
         <div className="pill-container">{label}</div>
-      </a>
+      )}
     </>
   );
 };

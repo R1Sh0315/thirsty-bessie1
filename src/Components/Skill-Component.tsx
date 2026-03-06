@@ -35,7 +35,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
     );
     const months: number = Math.floor(
       (differenceMs % (1000 * 60 * 60 * 24 * 365.25)) /
-        (1000 * 60 * 60 * 24 * 30.44),
+      (1000 * 60 * 60 * 24 * 30.44),
     );
 
     return { years, months };
@@ -44,6 +44,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
 
   const arrFEData = [
     <DProgressbarComponent
+      key="HTML"
       label="HTML"
       number={75}
       outputValue={(e) => {
@@ -56,6 +57,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
       }}
     />,
     <DProgressbarComponent
+      key="CSS"
       label="CSS"
       number={75}
       outputValue={(e) => {
@@ -68,6 +70,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
       }}
     />,
     <DProgressbarComponent
+      key="JS"
       label="JS"
       number={70}
       outputValue={(e) => {
@@ -80,6 +83,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
       }}
     />,
     <DProgressbarComponent
+      key="ReactJs"
       label="ReactJs"
       number={65}
       outputValue={(e) => {
@@ -92,6 +96,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
       }}
     />,
     <DProgressbarComponent
+      key="Angular"
       label="Angular"
       number={75}
       outputValue={(e) => {
@@ -107,6 +112,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
 
   const arrBEData = [
     <DProgressbarComponent
+      key="nodejs"
       label="nodejs"
       number={50}
       outputValue={(e) => {
@@ -119,6 +125,7 @@ const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
       }}
     />,
     <DProgressbarComponent
+      key="mongodb"
       label="mongodb"
       number={25}
       outputValue={(e) => {

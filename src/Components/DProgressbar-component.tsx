@@ -51,16 +51,17 @@ const DProgressbarComponent: React.FC<IDPB> = ({ label, number, outputValue }) =
               strokeWidth="5"
               strokeDasharray="0, 1000"
             ></circle>
+            <text
+              ref={textRef}
+              x="50%"
+              y="50%"
+              textAnchor="middle"
+              className="donut-text"
+              dy=".3em"
+            >
+              0%
+            </text>
           </svg>
-          <text
-            ref={textRef}
-            x="50%"
-            y="50%"
-            textAnchor="middle"
-            className="donut-text"
-          >
-            0%
-          </text>
         </div>
         <div className="DPB-label">{label}</div>
       </div>

@@ -14,20 +14,27 @@ interface IPill {
 
 const AchivementdsComponent: React.FC<IPill> = ({ data, isDark, label }) => {
   const certElement = data?.map((el: any) => (
-    <div className="cer-card">
-      <img className="cer-prev" src={el.icon} />
+    <div className="cer-card" key={el.name}>
+      <img className="cer-prev" src={el.icon} alt={el.name} />
       <div className={`car-detail `}>
-        <a className={`${isDark ? "dark" : "light"}`} href={el.url}>
-          <div className="car-name">{el.name}</div>
-          <div className="car-skill">
+        <div className="car-info-wrapper">
+          <a
+            className={`${isDark ? "dark" : "light"}`}
+            href={el.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="car-name">{el.name}</div>
             <div className="car-description">{el?.description}</div>
+          </a>
+          <div className="car-skill">
             <div className="pill-contient">
-              {el?.skills.map((skill: any) => (
-                <PillComponent label={skill} />
+              {el?.skills.map((skill: any, idx: number) => (
+                <PillComponent key={idx} label={skill} />
               ))}
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   ));

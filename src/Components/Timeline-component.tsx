@@ -39,11 +39,9 @@ const TimeLineComponent: React.FC<ITimeline> = ({
   const tlElement = data.map((li: any, key: number) => (
     <div
       key={key}
-      className={`time-line-contianer ${timelineType}-timeline${
-        istoggle ? "-reverse" : ""
-      }`}
+      className={`time-line-contianer ${timelineType}-timeline${istoggle ? "-reverse" : ""
+        }`}
     >
-      {console.log(key, "key")}
       <div className={`time-line-cell-1${istoggle ? "-reverse" : ""}`}>
         <div className="time-line-cell-1-container">
           <div className="tl-icon-contianer">
@@ -64,25 +62,23 @@ const TimeLineComponent: React.FC<ITimeline> = ({
       <div className={`time-line-cell-2`}>
         <div className={`${cellFormating(key)}-stage ${cellFormating(key)}`}>
           <div
-            className={`${cellFormating(key)}-stage-${
-              cellFormating(key) == "initial"
+            className={`${cellFormating(key)}-stage-${cellFormating(key) == "initial"
                 ? "no-dash"
                 : cellFormating(key) == "mid"
                   ? "dash"
                   : "dash"
-            }`}
+              }`}
           ></div>
           <div className={`${cellFormating(key)}-stage-core`}>
             <div className="core"></div>
           </div>
           <div
-            className={`${cellFormating(key)}-stage-${
-              cellFormating(key) == "initial"
+            className={`${cellFormating(key)}-stage-${cellFormating(key) == "initial"
                 ? "dash"
                 : cellFormating(key) == "mid"
                   ? "dash"
                   : "no-dash"
-            }`}
+              }`}
           ></div>
         </div>
       </div>

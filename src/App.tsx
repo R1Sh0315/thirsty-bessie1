@@ -28,7 +28,6 @@ export default function App() {
     fetch("https://api.github.com/repos/R1Sh0315/thirsty-bessie1")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Last updated date:", data.updated_at);
         setLastUpdateDate(data.updated_at);
       });
   }, []);
@@ -50,7 +49,7 @@ export default function App() {
       <ProjectComponent
         label="My Project"
         isDark={isDarkMode}
-        data={jsonData.Pojects}
+        data={jsonData.Projects}
       />
       <AchivementdsComponent
         data={achivementData}
