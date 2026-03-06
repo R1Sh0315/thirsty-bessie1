@@ -3,6 +3,8 @@ import SchoolIcon from "@mui/icons-material/SchoolOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutlineOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearchingOutlined";
+import Button from "@mui/material/Button";
+import DownloadIcon from "@mui/icons-material/Download";
 import LabelShadowComponent from "./Label-Shadow";
 import DisplayWordsComponent from "./Display-word-Component";
 // import resume from '../utility/files/18JAN24.pdf'
@@ -88,9 +90,27 @@ const AboutCardComponent: React.FC<IACard> = ({ isDark }) => {
         </div>
       </div>
 
-      <div onClick={handleDownload} className="download-resume">
+      {/* Replaced custom div with MUI Button */}
+      <Button
+        variant="outlined"
+        onClick={handleDownload}
+        startIcon={<DownloadIcon />}
+        sx={{
+          margin: '7px 79% 0 25px',
+          padding: '12px 24px',
+          whiteSpace: 'nowrap',
+          minWidth: 'fit-content',
+          boxShadow: '0 8px 32px 0 rgba(57, 167, 255, 0.1)',
+          transition: '0.5s ease-out',
+          '&:hover': {
+            backgroundColor: '#39a7ff',
+            color: '#fff',
+            boxShadow: '0 8px 32px 0 rgba(57, 167, 255, 0.4)',
+          }
+        }}
+      >
         Download CV
-      </div>
+      </Button>
     </div>
   );
 };

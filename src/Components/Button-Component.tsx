@@ -1,28 +1,32 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import Button from "@mui/material/Button";
 
 interface ButtonProps {
   label: string;
   onClick?: () => String | number | void;
-  bgColor?: string;
+  bgColor?: "primary" | "secondary" | "inherit" | "error" | "info" | "success" | "warning";
   isDark?: boolean;
 }
 
 const ButtonComponent: React.FC<ButtonProps> = ({
   label,
   onClick,
-  bgColor,
+  bgColor = "primary",
 }) => {
-  const backColor =
-    bgColor === "primary"
-      ? "primary-btn"
-      : bgColor === "secondary"
-        ? "secondary-btn"
-        : "ghost-btn";
-
   return (
-    <div className={`btn-contianer ${backColor}`} onClick={onClick}>
+    <Button
+      variant={bgColor === "inherit" ? "text" : "contained"}
+      color={bgColor !== "inherit" ? bgColor as any : "primary"}
+      onClick={onClick}
+      style={{ margin: '7px 9px', minWidth: '250px' }}
+      sx={{
+        borderRadius: 2,
+        boxShadow: bgColor !== "inherit" ? "0 8px 32px 0 rgba(57, 167, 255, 0.4)" : "none",
+        fontWeight: 600
+      }}
+    >
       {label}
-    </div>
+    </Button>
   );
 };
 

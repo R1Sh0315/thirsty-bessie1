@@ -151,7 +151,7 @@
     {
       "name": "Nodejs basic",
       "url": "https://www.hackerrank.com/certificates/cb08d6d7d40e",
-      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/590px-Node.js_logo.svg.png?20170401104355",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
       "skills": [
         "Javascript, nodejs"
       ],

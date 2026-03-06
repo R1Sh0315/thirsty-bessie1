@@ -11,7 +11,7 @@
 
 body {
   margin: 0;
-  /* background-color: #1c1a27; */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -148,11 +148,18 @@ a {
 .about-card-container {
   height: 381px;
   margin: 14px 25px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  box-shadow: 0px 5px 10px 0px rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border-radius: 10px;
+.about-card-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
 }
 
 .n-container {
@@ -288,35 +295,55 @@ strong {
 
 .card-container {
   margin: 14px 25px;
-
+  background: rgba(255, 255, 255, 0.03);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
 }
 
 .skill-container {
   margin: 14px 25px;
-  box-shadow: 0px 5px 10px 0px rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border-radius: 10px;
-  border: 1px solid rgba(12, 4, 4, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   height: 532px;
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
 }
 
 .exp-contianer {
   margin: 14px 25px;
-  box-shadow: 0px 5px 10px 0px rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border-radius: 10px;
-  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   height: 700px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.exp-contianer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
 }
 
 .exp-content {
@@ -350,14 +377,14 @@ strong {
 }
 
 .dark-mode {
-  color: #f4f4f4 !important;
-  background-color: #1c1a27 !important;
+  color: #e2e8f0 !important;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
   padding: 10px 0;
 }
 
 .light-mode {
-  color: #242424 !important;
-  background-color: #f4f4f4 !important;
+  color: #1e293b !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
   padding: 10px 0;
 }
 
@@ -735,14 +762,21 @@ strong {
 
 .achi-contianer {
   margin: 14px 25px;
-  box-shadow: 0px 5px 10px 0px rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border-radius: 10px;
-  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.achi-contianer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
 }
 
 .achi-content {
@@ -829,6 +863,7 @@ a {
 
 .project-header {
   display: flex;
+  align-items: center;
   border-bottom: 1px solid #d11149;
   padding: 14px;
 }

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import LightModeIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeIcon from "@mui/icons-material/DarkModeOutlined";
-// import moon from "../utility/Darkmode.svg";
-// import sun from "../utility/Lightmode.svg";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 interface ITBtn {
   label: string;
@@ -14,8 +11,8 @@ interface ITBtn {
 const ToggleBtnComponent: React.FC<ITBtn> = ({ label, isDark, toToggle }) => {
   const [isBoolean, setIsBoolean] = useState(toToggle || false);
 
-  const onClickHandler = () => {
-    const newValue = !isBoolean;
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.checked;
     setIsBoolean(newValue);
     if (isDark) {
       isDark(newValue);
@@ -23,17 +20,12 @@ const ToggleBtnComponent: React.FC<ITBtn> = ({ label, isDark, toToggle }) => {
   };
 
   return (
-    <div className="TBtn-container" onClick={onClickHandler}>
-      {isBoolean ? (
-        // <img
-        //   className="theme-container"
-        //   src={"../utility/Darkmode.svg"}
-        //   alt="Dark mode"
-        // />
-        <WbSunnyIcon />
-      ) : (
-        <WbSunnyIcon />
-      )}
+    <div className="TBtn-container" style={{ position: 'absolute', top: 16, right: 16 }}>
+      <FormControlLabel
+        control={<Switch checked={isBoolean} onChange={onChangeHandler} color="primary" />}
+        label={label}
+        style={{ color: isBoolean ? "#e2e8f0" : "#1e293b" }}
+      />
     </div>
   );
 };

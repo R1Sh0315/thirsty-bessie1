@@ -18,12 +18,12 @@ const ButtonGroupComponent: React.FC<IBtnGroup> = ({ bgList, outputValue, isDark
   };
 
   return (
-    <div className={`bg-container-${isDark?'dark':'light'}`}>
+    <div className={`bg-container-${isDark ? 'dark' : 'light'}`}>
       {bgList.map((el, key) => (
         <ButtonComponent
           key={key}
           label={el}
-          bgColor={selectedIdx === key ? "primary" : "ghostColor"}
+          bgColor={selectedIdx === key ? "primary" : "inherit"}
           onClick={() => onClickHandler(key)}
         />
       ))}

@@ -14,6 +14,8 @@ import AchivementdsComponent from "./Components/Achivements-component";
 
 import jsonData from "./Json/my.json";
 import ProjectComponent from "./Components/Project-component";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 export default function App() {
   const handleClick = (action: string): string => {
@@ -33,32 +35,50 @@ export default function App() {
       });
   }, []);
 
+  const theme = createTheme({
+    palette: {
+      mode: isDarkMode ? 'dark' : 'light',
+      primary: {
+        main: '#39a7ff',
+      },
+      secondary: {
+        main: '#f72798',
+      },
+    },
+    typography: {
+      fontFamily: '"Fredoka", "Roboto", "Helvetica", "Arial", sans-serif',
+    },
+  });
+
   return (
-    <div className={`App ${isDarkMode ? "dark-mode" : "light-mode"}`}>
-      <ToggleBtnComponent
-        label="Dark Mode"
-        toToggle={isDarkMode}
-        isDark={setDarkMode}
-      />
-      <AboutComponent />
-      <AboutCardComponent isDark={isDarkMode} />
-      <SkillComponent isDark={isDarkMode} label="Skills" />{" "}
-      <ExperienceComponent
-        isDark={isDarkMode}
-        label="Experience & Qualification"
-      />
-      <ContributionsComponent isDark={isDarkMode} label="Open Source Contributions" />
-      <ProjectComponent
-        label="My Project"
-        isDark={isDarkMode}
-        data={jsonData.Projects}
-      />
-      <AchivementdsComponent
-        data={achivementData}
-        isDark={isDarkMode}
-        label="Licenses & certifications"
-      />
-      <div className="update-content">Last updated date: {lastUpdateDate}</div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className={`App ${isDarkMode ? "dark-mode" : "light-mode"}`}>
+        <ToggleBtnComponent
+          label="Dark Mode"
+          toToggle={isDarkMode}
+          isDark={setDarkMode}
+        />
+        <AboutComponent />
+        <AboutCardComponent isDark={isDarkMode} />
+        <SkillComponent isDark={isDarkMode} label="Skills" />{" "}
+        <ExperienceComponent
+          isDark={isDarkMode}
+          label="Experience & Qualification"
+        />
+        <ContributionsComponent isDark={isDarkMode} label="Open Source Contributions" />
+        <ProjectComponent
+          label="My Project"
+          isDark={isDarkMode}
+          data={jsonData.Projects}
+        />
+        <AchivementdsComponent
+          data={achivementData}
+          isDark={isDarkMode}
+          label="Licenses & certifications"
+        />
+        <div className="update-content" style={{ padding: '20px 0', opacity: 0.7 }}>Last updated date: {lastUpdateDate}</div>
+      </div>
+    </ThemeProvider>
   );
 }
