@@ -7,6 +7,7 @@ import CardComponent from "./Components/Card-Components";
 import SkillComponent from "./Components/Skill-Component";
 // import backPic from "./utility/background.svg";
 import ExperienceComponent from "./Components/Experience-Component";
+import ContributionsComponent from "./Components/Contributions-component";
 import AnimatedHeader from "./Components/Node-Animation-Component";
 import ToggleBtnComponent from "./Components/Toggle-btn";
 import AchivementdsComponent from "./Components/Achivements-component";
@@ -46,6 +47,7 @@ export default function App() {
         isDark={isDarkMode}
         label="Experience & Qualification"
       />
+      <ContributionsComponent isDark={isDarkMode} label="Open Source Contributions" />
       <ProjectComponent
         label="My Project"
         isDark={isDarkMode}
