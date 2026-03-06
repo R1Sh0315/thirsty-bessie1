@@ -160,7 +160,13 @@ const ContributionsComponent: React.FC<IContributions> = ({ isDark, label }) => 
                     });
                 }
 
-                const result = Object.values(repoGroups).filter(g => g.items.length > 0);
+                const excludeRepos = ["complexpotato/Faitagram"];
+                const result = Object.values(repoGroups).filter(g => {
+                    const fullRepoName = `${g.ownerLogin}/${g.repoName}`;
+                    return g.items.length > 0 &&
+                        g.ownerLogin !== "R1Sh0315" &&
+                        !excludeRepos.includes(fullRepoName);
+                });
 
                 // Sort items roughly by date
                 result.forEach(group => {
