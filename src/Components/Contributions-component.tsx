@@ -41,13 +41,20 @@ const ContributionsComponent: React.FC<IContributions> = ({ isDark, label }) => 
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await fetch("https://api.github.com/users/R1Sh0315/events");
-                if (!response.ok) throw new Error("Failed to fetch");
-                const data: IGHEvent[] = await response.json();
-                if (!Array.isArray(data)) {
-                    setLoading(false);
-                    return;
+                // Fetch PRs using search API for comprehensive data (open, merged, closed)
+                const prResponse = await fetch("https://api.github.com/search/issues?q=author:R1Sh0315+type:pr");
+                let prData: any = null;
+                if (prResponse.ok) {
+                    prData = await prResponse.json();
                 }
+
+                // Fetch recent events for commits
+                const eventsResponse = await fetch("https://api.github.com/users/R1Sh0315/events");
+                let eventsData: any = null;
+                if (eventsResponse.ok) {
+                    eventsData = await eventsResponse.json();
+                }
+
                 const repoGroups: Record<string, RepoContribution> = {};
 
                 const formatDate = (dateStr: any) => {
@@ -55,100 +62,111 @@ const ContributionsComponent: React.FC<IContributions> = ({ isDark, label }) => 
                     return isNaN(d.getTime()) ? "N/A" : d.toLocaleDateString();
                 };
 
-                for (const event of data) {
-                    try {
-                        if (!event || !event.repo || !event.repo.name) continue;
+                const getOrInitGroup = (repoFullName: string) => {
+                    if (!repoGroups[repoFullName]) {
+                        const parts = repoFullName.split('/');
+                        const ownerLogin = parts[0] || "Unknown";
+                        const name = parts[1] || repoFullName;
+                        repoGroups[repoFullName] = {
+                            repoName: name,
+                            ownerLogin: ownerLogin,
+                            ownerAvatar: `https://avatars.githubusercontent.com/${ownerLogin}`,
+                            mergedPRs: 0,
+                            totalCommits: 0,
+                            repoUrl: `https://github.com/${repoFullName}`,
+                            items: [],
+                        };
+                    }
+                    return repoGroups[repoFullName];
+                };
 
-                        const repoName = event.repo.name;
-                        if (!repoGroups[repoName]) {
-                            const repoParts = repoName.split('/');
-                            const ownerLogin = repoParts[0] || "Unknown";
-                            const name = repoParts[1] || repoName;
+                // Process PRs
+                if (prData && Array.isArray(prData.items)) {
+                    prData.items.forEach((pr: any) => {
+                        try {
+                            // repository_url is like "https://api.github.com/repos/owner/repo"
+                            const urlParts = pr.repository_url.split('/');
+                            const repoName = `${urlParts[urlParts.length - 2]}/${urlParts[urlParts.length - 1]}`;
+                            const group = getOrInitGroup(repoName);
 
-                            repoGroups[repoName] = {
-                                repoName: name,
-                                ownerLogin: ownerLogin,
-                                ownerAvatar: `https://avatars.githubusercontent.com/${ownerLogin}`,
-                                mergedPRs: 0,
-                                totalCommits: 0,
-                                repoUrl: `https://github.com/${repoName}`,
-                                items: [],
-                            };
-                        }
-
-                        const group = repoGroups[repoName];
-                        const payload = event.payload || {};
-
-                        if (event.type === "PullRequestEvent" && payload.pull_request) {
-                            const pr = payload.pull_request;
-                            const isMerged = !!pr.merged;
-                            const action = String(payload.action).toLowerCase();
-
-                            if (action === "closed") {
-                                if (isMerged) {
-                                    group.mergedPRs++;
-                                    group.items.push({
-                                        id: String(pr.id || Math.random()),
-                                        title: pr.title || "Merged Pull Request",
-                                        url: pr.html_url || "#",
-                                        date: formatDate(pr.merged_at || event.created_at),
-                                        type: "PR",
-                                        status: "merged",
-                                    });
-                                } else {
-                                    group.items.push({
-                                        id: String(pr.id || Math.random()),
-                                        title: pr.title || "Closed Pull Request",
-                                        url: pr.html_url || "#",
-                                        date: formatDate(pr.closed_at || event.created_at),
-                                        type: "PR",
-                                        status: "closed",
-                                    });
-                                }
-                            } else if (action === "opened" || action === "reopened") {
-                                group.items.push({
-                                    id: String(pr.id || Math.random()),
-                                    title: pr.title || "Opened Pull Request",
-                                    url: pr.html_url || "#",
-                                    date: formatDate(pr.created_at || event.created_at),
-                                    type: "PR",
-                                    status: "open",
-                                });
+                            let status: "open" | "closed" | "merged" = "open";
+                            if (pr.pull_request && pr.pull_request.merged_at) {
+                                status = "merged";
+                                group.mergedPRs++;
+                            } else if (pr.state === "closed") {
+                                status = "closed";
                             }
-                        } else if (event.type === "PushEvent") {
-                            const commits = Array.isArray(payload.commits) ? payload.commits : [];
-                            group.totalCommits += commits.length;
-                            commits.forEach((commit: any) => {
-                                if (commit) {
-                                    group.items.push({
-                                        id: commit.sha || Math.random().toString(),
-                                        title: commit.message || "Code adjustment",
-                                        url: commit.url || `https://github.com/${repoName}/commit/${commit.sha}`,
-                                        date: formatDate(event.created_at),
-                                        type: "Commit",
-                                    });
-                                }
-                            });
-                        } else if (event.type === "IssuesEvent" && payload.issue) {
-                            const issue = payload.issue;
-                            const action = String(payload.action).toLowerCase();
-                            const status: "open" | "closed" = (action === "closed") ? "closed" : "open";
 
                             group.items.push({
-                                id: String(issue.id || Math.random()),
-                                title: issue.title || "Issue resolution",
-                                url: issue.html_url || "#",
-                                date: formatDate(issue.created_at || event.created_at),
-                                type: "Issue",
-                                status: status,
+                                id: String(pr.id || Math.random()),
+                                title: pr.title || "Pull Request",
+                                url: pr.html_url || "#",
+                                date: formatDate(pr.created_at),
+                                type: "PR",
+                                status: status
                             });
+                        } catch (e) {
+                            console.error("Error parsing PR", e);
                         }
-                    } catch (eventError) {
-                        console.error("Error processing single event:", event, eventError);
-                    }
+                    });
+                }
+
+                // Process Events for Commits and Issues
+                if (Array.isArray(eventsData)) {
+                    eventsData.forEach((event: IGHEvent) => {
+                        try {
+                            if (!event || !event.repo || !event.repo.name) return;
+                            const repoName = event.repo.name;
+                            const group = getOrInitGroup(repoName);
+                            const payload = event.payload || {};
+
+                            // We only process PushEvent and IssuesEvent here, PRs handled via search
+                            if (event.type === "PushEvent") {
+                                const commits = Array.isArray(payload.commits) ? payload.commits : [];
+                                group.totalCommits += commits.length;
+                                commits.forEach((commit: any) => {
+                                    if (commit) {
+                                        group.items.push({
+                                            id: commit.sha || Math.random().toString(),
+                                            title: commit.message || "Code adjustment",
+                                            url: commit.url || `https://github.com/${repoName}/commit/${commit.sha}`,
+                                            date: formatDate(event.created_at),
+                                            type: "Commit",
+                                            status: "commit" as any
+                                        });
+                                    }
+                                });
+                            } else if (event.type === "IssuesEvent" && payload.issue) {
+                                const issue = payload.issue;
+                                const action = String(payload.action).toLowerCase();
+                                const status: "open" | "closed" = (action === "closed") ? "closed" : "open";
+
+                                // check if we already added this issue
+                                const existingIssue = group.items.find(i => String(i.id) === String(issue.id || ""));
+                                if (!existingIssue) {
+                                    group.items.push({
+                                        id: String(issue.id || Math.random()),
+                                        title: issue.title || "Issue resolution",
+                                        url: issue.html_url || "#",
+                                        date: formatDate(issue.created_at || event.created_at),
+                                        type: "Issue",
+                                        status: status,
+                                    });
+                                }
+                            }
+                        } catch (e) {
+                            console.error("Error parsing Event", e);
+                        }
+                    });
                 }
 
                 const result = Object.values(repoGroups).filter(g => g.items.length > 0);
+
+                // Sort items roughly by date
+                result.forEach(group => {
+                    group.items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                });
+
                 setContributions(result);
                 setLoading(false);
             } catch (error) {
@@ -156,7 +174,6 @@ const ContributionsComponent: React.FC<IContributions> = ({ isDark, label }) => 
                 setLoading(false);
             }
         };
-
         fetchEvents();
     }, []);
 
