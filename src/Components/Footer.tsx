@@ -91,7 +91,7 @@ const Footer: React.FC<FooterProps> = ({ isDark, lastUpdateDate }) => {
             <Tooltip title="LinkedIn">
               <IconButton
                 component="a"
-                href="https://linkedin.com/in/rishikesh-bhalekar"
+                href="https://www.linkedin.com/in/rishikesh-bhalekar-198041196/"
                 target="_blank"
                 rel="noreferrer"
                 size="small"

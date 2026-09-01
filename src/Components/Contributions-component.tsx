@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
@@ -21,10 +20,6 @@ import CommitIcon from "@mui/icons-material/Commit";
 import CallMergeIcon from "@mui/icons-material/CallMerge";
 import AdjustIcon from "@mui/icons-material/Adjust";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-import CodeIcon from "@mui/icons-material/Code";
-import BugReportIcon from "@mui/icons-material/BugReport";
-import BuildIcon from "@mui/icons-material/Build";
-import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 
 import LabelShadowComponent from "./Label-Shadow";
 
@@ -117,6 +112,7 @@ const classifyContribution = (title: string): ContributionItem["category"] => {
 
 const ContributionsComponent: React.FC<ContributionsComponentProps> = ({ isDark, label }) => {
   const [contributions, setContributions] = useState<RepoContribution[]>([]);
+  // By default, everything is collapsed (expandedRepo = null)
   const [expandedRepo, setExpandedRepo] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -207,7 +203,7 @@ const ContributionsComponent: React.FC<ContributionsComponentProps> = ({ isDark,
           });
         }
 
-        // 2. Process Commits from search API
+        // 2. Process Commits
         if (commitRes && Array.isArray(commitRes.items)) {
           commitRes.items.forEach((commitItem: any) => {
             try {
@@ -287,7 +283,7 @@ const ContributionsComponent: React.FC<ContributionsComponentProps> = ({ isDark,
         // Sort repos by merged PRs descending
         result.sort((a, b) => b.mergedPRs - a.mergedPRs);
 
-        // Sort items roughly by date
+        // Sort items by date
         result.forEach((group) => {
           group.totalContributions = group.items.length;
           group.items.sort(
@@ -296,9 +292,8 @@ const ContributionsComponent: React.FC<ContributionsComponentProps> = ({ isDark,
         });
 
         setContributions(result);
-        if (result.length > 0) {
-          setExpandedRepo(`${result[0].ownerLogin}/${result[0].repoName}`);
-        }
+        // By default, leave all collapsed
+        setExpandedRepo(null);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching GitHub contributions:", error);
@@ -423,120 +418,103 @@ const ContributionsComponent: React.FC<ContributionsComponentProps> = ({ isDark,
             </Typography>
           </Box>
         ) : (
-          <Grid container spacing={3}>
+          <Stack spacing={2.5}>
             {contributions.map((repo) => {
               const fullKey = `${repo.ownerLogin}/${repo.repoName}`;
               const isExpanded = expandedRepo === fullKey;
 
               return (
-                <Grid item xs={12} md={contributions.length === 1 ? 12 : 6} key={fullKey}>
+                <Box
+                  key={fullKey}
+                  sx={{
+                    borderRadius: 3,
+                    bgcolor: isDark ? "rgba(15, 23, 42, 0.5)" : "rgba(241, 245, 249, 0.75)",
+                    border: isDark
+                      ? "1px solid rgba(255, 255, 255, 0.08)"
+                      : "1px solid rgba(0, 0, 0, 0.06)",
+                    overflow: "hidden",
+                    transition: "all 0.25s ease",
+                    "&:hover": {
+                      borderColor: "primary.main",
+                      boxShadow: isDark
+                        ? "0 10px 28px -10px rgba(56, 189, 248, 0.2)"
+                        : "0 10px 28px -10px rgba(2, 132, 199, 0.15)",
+                    },
+                  }}
+                >
+                  {/* Header Bar */}
                   <Box
+                    onClick={() => toggleExpand(fullKey)}
                     sx={{
-                      borderRadius: 3,
-                      bgcolor: isDark ? "rgba(15, 23, 42, 0.5)" : "rgba(241, 245, 249, 0.75)",
-                      border: isDark
-                        ? "1px solid rgba(255, 255, 255, 0.08)"
-                        : "1px solid rgba(0, 0, 0, 0.06)",
-                      overflow: "hidden",
-                      transition: "all 0.25s ease",
+                      p: { xs: 2, sm: 2.5 },
+                      display: "flex",
+                      flexDirection: { xs: "column", md: "row" },
+                      justifyContent: "space-between",
+                      alignItems: { xs: "flex-start", md: "center" },
+                      gap: 2,
+                      cursor: "pointer",
                       "&:hover": {
-                        borderColor: "primary.main",
-                        boxShadow: isDark
-                          ? "0 10px 28px -10px rgba(56, 189, 248, 0.2)"
-                          : "0 10px 28px -10px rgba(2, 132, 199, 0.15)",
+                        bgcolor: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.02)",
                       },
                     }}
                   >
-                    {/* Header */}
-                    <Box
-                      onClick={() => toggleExpand(fullKey)}
-                      sx={{
-                        p: { xs: 2, sm: 2.5 },
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        cursor: "pointer",
-                        "&:hover": {
-                          bgcolor: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.02)",
-                        },
-                      }}
-                    >
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                        <Avatar
-                          src={repo.ownerAvatar}
-                          alt={repo.ownerLogin}
+                    {/* Left: Avatar + Names + Domain */}
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2, minWidth: { md: "280px" } }}>
+                      <Avatar
+                        src={repo.ownerAvatar}
+                        alt={repo.ownerLogin}
+                        sx={{
+                          width: 48,
+                          height: 48,
+                          border: "2px solid",
+                          borderColor: "primary.main",
+                          boxShadow: "0 4px 12px rgba(56, 189, 248, 0.3)",
+                        }}
+                      />
+                      <Box>
+                        <Typography
+                          variant="caption"
                           sx={{
-                            width: 48,
-                            height: 48,
-                            border: "2px solid",
-                            borderColor: "primary.main",
-                            boxShadow: "0 4px 12px rgba(56, 189, 248, 0.3)",
+                            color: isDark ? "#94a3b8" : "#64748b",
+                            fontWeight: 600,
+                            display: "block",
                           }}
-                        />
-                        <Box>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              color: isDark ? "#94a3b8" : "#64748b",
-                              fontWeight: 600,
-                              display: "block",
-                            }}
-                          >
-                            {repo.ownerLogin}
-                          </Typography>
-                          <Typography
-                            variant="subtitle1"
-                            sx={{
-                              fontWeight: 700,
-                              color: "primary.main",
-                              lineHeight: 1.2,
-                              fontSize: "1.05rem",
-                            }}
-                          >
-                            {repo.repoName}
-                          </Typography>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              color: isDark ? "#cbd5e1" : "#475569",
-                              display: "block",
-                              mt: 0.3,
-                              fontWeight: 500,
-                            }}
-                          >
-                            {repo.domain}
-                          </Typography>
-                        </Box>
-                      </Box>
-
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <Tooltip title="View Project on GitHub">
-                          <IconButton
-                            size="small"
-                            component="a"
-                            href={repo.repoUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-                            sx={{ color: isDark ? "#cbd5e1" : "#475569" }}
-                          >
-                            <GitHubIcon fontSize="small" />
-                          </IconButton>
-                        </Tooltip>
-                        <IconButton size="small" sx={{ color: isDark ? "#cbd5e1" : "#475569" }}>
-                          {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                        </IconButton>
+                        >
+                          {repo.ownerLogin}
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          sx={{
+                            fontWeight: 700,
+                            color: "primary.main",
+                            lineHeight: 1.2,
+                            fontSize: "1.08rem",
+                          }}
+                        >
+                          {repo.repoName}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: isDark ? "#cbd5e1" : "#475569",
+                            display: "block",
+                            mt: 0.2,
+                            fontWeight: 500,
+                          }}
+                        >
+                          {repo.domain}
+                        </Typography>
                       </Box>
                     </Box>
 
-                    {/* Skill Tags for Recruiters/Interviewers */}
+                    {/* Middle: Skills */}
                     <Box
                       sx={{
-                        px: { xs: 2, sm: 2.5 },
-                        pb: 1.5,
                         display: "flex",
                         flexWrap: "wrap",
                         gap: 0.8,
+                        flexGrow: 1,
+                        justifyContent: { xs: "flex-start", md: "center" },
                       }}
                     >
                       {repo.keySkills.map((skill, sIdx) => (
@@ -555,70 +533,43 @@ const ContributionsComponent: React.FC<ContributionsComponentProps> = ({ isDark,
                       ))}
                     </Box>
 
-                    {/* Stats Strip */}
+                    {/* Right: Stats + Action Icons */}
                     <Box
                       sx={{
-                        px: { xs: 2, sm: 2.5 },
-                        py: 1.4,
                         display: "flex",
                         alignItems: "center",
-                        gap: { xs: 1.5, sm: 2.5 },
+                        gap: 1.5,
                         flexWrap: "wrap",
-                        borderTop: isDark
-                          ? "1px solid rgba(255, 255, 255, 0.05)"
-                          : "1px solid rgba(0, 0, 0, 0.04)",
-                        borderBottom: isDark
-                          ? "1px solid rgba(255, 255, 255, 0.05)"
-                          : "1px solid rgba(0, 0, 0, 0.04)",
-                        bgcolor: isDark ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.02)",
+                        justifyContent: { xs: "space-between", md: "flex-end" },
+                        width: { xs: "100%", md: "auto" },
                       }}
                     >
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 0.8 }}>
-                        <Typography
-                          variant="caption"
-                          sx={{ color: isDark ? "#94a3b8" : "#64748b", fontWeight: 600 }}
-                        >
-                          Merged PRs:
-                        </Typography>
+                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                         <Chip
-                          label={repo.mergedPRs}
+                          label={`${repo.mergedPRs} Merged`}
                           size="small"
                           sx={{
-                            height: 20,
+                            height: 22,
                             fontWeight: 700,
                             fontSize: "0.74rem",
                             bgcolor: isDark ? "rgba(168, 85, 247, 0.18)" : "rgba(147, 51, 234, 0.12)",
                             color: isDark ? "#c084fc" : "#7e22ce",
                           }}
                         />
-                      </Box>
-
-                      <Divider orientation="vertical" flexItem sx={{ opacity: 0.5 }} />
-
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 0.8 }}>
-                        <Typography
-                          variant="caption"
-                          sx={{ color: isDark ? "#94a3b8" : "#64748b", fontWeight: 600 }}
-                        >
-                          Total PRs:
-                        </Typography>
                         <Chip
-                          label={repo.totalPRs || repo.totalContributions}
+                          label={`${repo.totalPRs || repo.totalContributions} Total PRs`}
                           size="small"
                           sx={{
-                            height: 20,
+                            height: 22,
                             fontWeight: 700,
                             fontSize: "0.74rem",
                             bgcolor: isDark ? "rgba(56, 189, 248, 0.18)" : "rgba(2, 132, 199, 0.12)",
                             color: "primary.main",
                           }}
                         />
-                      </Box>
-
-                      <Box sx={{ ml: "auto" }}>
                         <Chip
-                          icon={<VerifiedUserIcon sx={{ fontSize: "14px !important" }} />}
-                          label={repo.mergedPRs > 0 ? "Verified Contributor" : "Active PR Contributor"}
+                          icon={<VerifiedUserIcon sx={{ fontSize: "13px !important" }} />}
+                          label="Verified"
                           size="small"
                           sx={{
                             height: 22,
@@ -626,143 +577,169 @@ const ContributionsComponent: React.FC<ContributionsComponentProps> = ({ isDark,
                             fontWeight: 700,
                             bgcolor: isDark ? "rgba(34, 197, 94, 0.12)" : "rgba(22, 163, 74, 0.08)",
                             color: isDark ? "#4ade80" : "#16a34a",
-                            border: isDark ? "1px solid rgba(34, 197, 94, 0.25)" : "1px solid rgba(22, 163, 74, 0.2)",
                           }}
                         />
                       </Box>
+
+                      <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                        <Tooltip title="View Project on GitHub">
+                          <IconButton
+                            size="small"
+                            component="a"
+                            href={repo.repoUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                            sx={{ color: isDark ? "#cbd5e1" : "#475569" }}
+                          >
+                            <GitHubIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                        <IconButton size="small" sx={{ color: isDark ? "#cbd5e1" : "#475569" }}>
+                          {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                        </IconButton>
+                      </Box>
                     </Box>
+                  </Box>
 
-                    {/* Expandable Contributions Details for Interviewers */}
-                    <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-                      <Box sx={{ p: { xs: 2, sm: 2.5 } }}>
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            color: isDark ? "#94a3b8" : "#64748b",
-                            fontWeight: 700,
-                            textTransform: "uppercase",
-                            letterSpacing: "0.5px",
-                            display: "block",
-                            mb: 1.5,
-                          }}
-                        >
-                          Pull Requests & Engineering Deliverables
-                        </Typography>
+                  {/* Expandable Contributions Details */}
+                  <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+                    <Box
+                      sx={{
+                        p: { xs: 2, sm: 2.5 },
+                        borderTop: isDark
+                          ? "1px solid rgba(255, 255, 255, 0.05)"
+                          : "1px solid rgba(0, 0, 0, 0.04)",
+                        bgcolor: isDark ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.02)",
+                      }}
+                    >
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: isDark ? "#94a3b8" : "#64748b",
+                          fontWeight: 700,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                          display: "block",
+                          mb: 1.5,
+                        }}
+                      >
+                        Pull Requests & Engineering Deliverables
+                      </Typography>
 
-                        <Stack spacing={1.5}>
-                          {repo.items.slice(0, 10).map((item, idx) => (
+                      <Stack spacing={1.5}>
+                        {repo.items.slice(0, 10).map((item, idx) => (
+                          <Box
+                            key={item.id || idx}
+                            sx={{
+                              p: 1.8,
+                              borderRadius: 2.5,
+                              bgcolor: isDark ? "rgba(15, 23, 42, 0.45)" : "rgba(255, 255, 255, 0.9)",
+                              border: isDark
+                                ? "1px solid rgba(255, 255, 255, 0.06)"
+                                : "1px solid rgba(0, 0, 0, 0.05)",
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: 1,
+                              transition: "all 0.2s ease",
+                              "&:hover": {
+                                borderColor: "primary.main",
+                                transform: "translateX(4px)",
+                              },
+                            }}
+                          >
+                            {/* Top row: PR Number + Category + Title + Code Diff Button */}
                             <Box
-                              key={item.id || idx}
                               sx={{
-                                p: 1.8,
-                                borderRadius: 2.5,
-                                bgcolor: isDark ? "rgba(15, 23, 42, 0.4)" : "rgba(255, 255, 255, 0.9)",
-                                border: isDark
-                                  ? "1px solid rgba(255, 255, 255, 0.06)"
-                                  : "1px solid rgba(0, 0, 0, 0.05)",
                                 display: "flex",
-                                flexDirection: "column",
-                                gap: 1,
-                                transition: "all 0.2s ease",
-                                "&:hover": {
-                                  borderColor: "primary.main",
-                                  transform: "translateX(3px)",
-                                },
+                                justifyContent: "space-between",
+                                alignItems: "flex-start",
+                                gap: 1.5,
                               }}
                             >
-                              {/* Top row: PR Number + Category + Title */}
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  alignItems: "flex-start",
-                                  gap: 1.5,
-                                }}
-                              >
-                                <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
-                                  {item.number && (
-                                    <Chip
-                                      label={`#${item.number}`}
-                                      size="small"
-                                      sx={{
-                                        height: 20,
-                                        fontSize: "0.7rem",
-                                        fontWeight: 700,
-                                        bgcolor: isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.06)",
-                                        color: isDark ? "#cbd5e1" : "#475569",
-                                      }}
-                                    />
-                                  )}
-                                  {getCategoryBadge(item.category)}
-                                </Box>
-
-                                <Button
-                                  variant="outlined"
-                                  size="small"
-                                  component="a"
-                                  href={item.url}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  endIcon={<LaunchIcon sx={{ fontSize: "13px !important" }} />}
-                                  sx={{
-                                    py: 0.2,
-                                    px: 1.2,
-                                    fontSize: "0.72rem",
-                                    fontWeight: 600,
-                                    minWidth: "auto",
-                                    borderRadius: 1.5,
-                                    borderColor: isDark ? "rgba(255, 255, 255, 0.15)" : "rgba(0, 0, 0, 0.15)",
-                                    color: isDark ? "#cbd5e1" : "#475569",
-                                    "&:hover": {
-                                      borderColor: "primary.main",
-                                      color: "primary.main",
-                                    },
-                                  }}
-                                >
-                                  Code Diff
-                                </Button>
+                              <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
+                                {item.number && (
+                                  <Chip
+                                    label={`#${item.number}`}
+                                    size="small"
+                                    sx={{
+                                      height: 20,
+                                      fontSize: "0.7rem",
+                                      fontWeight: 700,
+                                      bgcolor: isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.06)",
+                                      color: isDark ? "#cbd5e1" : "#475569",
+                                    }}
+                                  />
+                                )}
+                                {getCategoryBadge(item.category)}
                               </Box>
 
-                              {/* Title */}
-                              <Typography
-                                variant="body2"
+                              <Button
+                                variant="outlined"
+                                size="small"
+                                component="a"
+                                href={item.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                endIcon={<LaunchIcon sx={{ fontSize: "13px !important" }} />}
                                 sx={{
+                                  py: 0.2,
+                                  px: 1.2,
+                                  fontSize: "0.72rem",
                                   fontWeight: 600,
-                                  color: isDark ? "#f1f5f9" : "#0f172a",
-                                  lineHeight: 1.45,
+                                  minWidth: "auto",
+                                  borderRadius: 1.5,
+                                  borderColor: isDark ? "rgba(255, 255, 255, 0.15)" : "rgba(0, 0, 0, 0.15)",
+                                  color: isDark ? "#cbd5e1" : "#475569",
+                                  "&:hover": {
+                                    borderColor: "primary.main",
+                                    color: "primary.main",
+                                  },
                                 }}
                               >
-                                {item.title}
-                              </Typography>
-
-                              {/* Bottom row: Status + Date */}
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  alignItems: "center",
-                                  pt: 0.5,
-                                  borderTop: isDark ? "1px solid rgba(255, 255, 255, 0.04)" : "1px solid rgba(0, 0, 0, 0.03)",
-                                }}
-                              >
-                                {getStatusChip(item.status)}
-                                <Typography
-                                  variant="caption"
-                                  sx={{ color: isDark ? "#94a3b8" : "#64748b", fontWeight: 500 }}
-                                >
-                                  {item.date}
-                                </Typography>
-                              </Box>
+                                Code Diff
+                              </Button>
                             </Box>
-                          ))}
-                        </Stack>
-                      </Box>
-                    </Collapse>
-                  </Box>
-                </Grid>
+
+                            {/* Title */}
+                            <Typography
+                              variant="body2"
+                              sx={{
+                                fontWeight: 600,
+                                color: isDark ? "#f1f5f9" : "#0f172a",
+                                lineHeight: 1.45,
+                              }}
+                            >
+                              {item.title}
+                            </Typography>
+
+                            {/* Bottom row: Status + Date */}
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                pt: 0.5,
+                                borderTop: isDark ? "1px solid rgba(255, 255, 255, 0.04)" : "1px solid rgba(0, 0, 0, 0.03)",
+                              }}
+                            >
+                              {getStatusChip(item.status)}
+                              <Typography
+                                variant="caption"
+                                sx={{ color: isDark ? "#94a3b8" : "#64748b", fontWeight: 500 }}
+                              >
+                                {item.date}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        ))}
+                      </Stack>
+                    </Box>
+                  </Collapse>
+                </Box>
               );
             })}
-          </Grid>
+          </Stack>
         )}
       </Card>
     </Box>

@@ -13,6 +13,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOnOutlined";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistoryOutlined";
 import SendIcon from "@mui/icons-material/Send";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LabelShadowComponent from "./Label-Shadow";
 
 interface AboutCardComponentProps {
@@ -216,6 +217,29 @@ const AboutCardComponent: React.FC<AboutCardComponentProps> = ({ isDark }) => {
           <Button
             variant="outlined"
             component="a"
+            href="https://www.linkedin.com/in/rishikesh-bhalekar-198041196/"
+            target="_blank"
+            rel="noreferrer"
+            startIcon={<LinkedInIcon />}
+            size="large"
+            sx={{
+              py: 1.2,
+              px: 3,
+              fontWeight: 600,
+              borderColor: isDark ? "rgba(10, 102, 194, 0.4)" : "rgba(10, 102, 194, 0.3)",
+              color: isDark ? "#60a5fa" : "#0a66c2",
+              "&:hover": {
+                borderColor: "#0a66c2",
+                bgcolor: isDark ? "rgba(10, 102, 194, 0.1)" : "rgba(10, 102, 194, 0.08)",
+              },
+            }}
+          >
+            LinkedIn
+          </Button>
+
+          <Button
+            variant="outlined"
+            component="a"
             href="https://github.com/R1Sh0315"
             target="_blank"
             rel="noreferrer"
@@ -233,7 +257,7 @@ const AboutCardComponent: React.FC<AboutCardComponentProps> = ({ isDark }) => {
               },
             }}
           >
-            GitHub Profile
+            GitHub
           </Button>
         </Box>
       </Card>
