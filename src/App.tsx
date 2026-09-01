@@ -1,83 +1,74 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+
 import "./styles.css";
+import { getAppTheme } from "./theme";
+import Navbar from "./Components/Navbar";
 import AboutComponent from "./Components/About-Component";
-import ButtonComponent from "./Components/Button-Component";
 import AboutCardComponent from "./Components/About-card-component";
-import CardComponent from "./Components/Card-Components";
 import SkillComponent from "./Components/Skill-Component";
-// import backPic from "./utility/background.svg";
 import ExperienceComponent from "./Components/Experience-Component";
 import ContributionsComponent from "./Components/Contributions-component";
-import AnimatedHeader from "./Components/Node-Animation-Component";
-import ToggleBtnComponent from "./Components/Toggle-btn";
+import ProjectComponent from "./Components/Project-component";
 import AchivementdsComponent from "./Components/Achivements-component";
+import Footer from "./Components/Footer";
+import ScrollToTop from "./Components/ScrollToTop";
 
 import jsonData from "./Json/my.json";
-import ProjectComponent from "./Components/Project-component";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 
 export default function App() {
-  const handleClick = (action: string): string => {
-    console.log(action);
-    return `${action}`;
-  };
-  const navList = ["About", "Skills", "Experience", "Project", "Resume"];
-  const [isDarkMode, setDarkMode] = useState(false);
+  // Default to dark mode for modern developer portfolio aesthetics
+  const [isDarkMode, setDarkMode] = useState(true);
   const [lastUpdateDate, setLastUpdateDate] = useState("");
-  const achivementData = jsonData.Achievement;
 
   useEffect(() => {
     fetch("https://api.github.com/repos/R1Sh0315/thirsty-bessie1")
       .then((response) => response.json())
       .then((data) => {
-        setLastUpdateDate(data.updated_at);
-      });
+        if (data && data.updated_at) {
+          setLastUpdateDate(data.updated_at);
+        }
+      })
+      .catch((err) => console.error("Error fetching repo info:", err));
   }, []);
 
-  const theme = createTheme({
-    palette: {
-      mode: isDarkMode ? 'dark' : 'light',
-      primary: {
-        main: '#39a7ff',
-      },
-      secondary: {
-        main: '#f72798',
-      },
-    },
-    typography: {
-      fontFamily: '"Fredoka", "Roboto", "Helvetica", "Arial", sans-serif',
-    },
-  });
+  const theme = getAppTheme(isDarkMode);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={`App ${isDarkMode ? "dark-mode" : "light-mode"}`}>
-        <ToggleBtnComponent
-          label="Dark Mode"
-          toToggle={isDarkMode}
-          isDark={setDarkMode}
-        />
-        <AboutComponent />
-        <AboutCardComponent isDark={isDarkMode} />
-        <SkillComponent isDark={isDarkMode} label="Skills" />{" "}
-        <ExperienceComponent
-          isDark={isDarkMode}
-          label="Experience & Qualification"
-        />
-        <ContributionsComponent isDark={isDarkMode} label="Open Source Contributions" />
-        <ProjectComponent
-          label="My Project"
-          isDark={isDarkMode}
-          data={jsonData.Projects}
-        />
-        <AchivementdsComponent
-          data={achivementData}
-          isDark={isDarkMode}
-          label="Licenses & certifications"
-        />
-        <div className="update-content" style={{ padding: '20px 0', opacity: 0.7 }}>Last updated date: {lastUpdateDate}</div>
+        <Navbar isDark={isDarkMode} onToggleTheme={setDarkMode} />
+
+        <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 }, flexGrow: 1 }}>
+          <AboutComponent isDark={isDarkMode} />
+          <AboutCardComponent isDark={isDarkMode} />
+          <SkillComponent isDark={isDarkMode} label="Technical Skills" />
+          <ExperienceComponent
+            isDark={isDarkMode}
+            label="Experience & Qualification"
+          />
+          <ContributionsComponent
+            isDark={isDarkMode}
+            label="Open Source Contributions"
+          />
+          <ProjectComponent
+            label="Featured Projects"
+            isDark={isDarkMode}
+            data={jsonData.Projects}
+          />
+          <AchivementdsComponent
+            data={jsonData.Achievement}
+            isDark={isDarkMode}
+            label="Licenses & Certifications"
+          />
+        </Container>
+
+        <Footer isDark={isDarkMode} lastUpdateDate={lastUpdateDate} />
+        <ScrollToTop />
       </div>
     </ThemeProvider>
   );

@@ -1,198 +1,385 @@
-import React, { useEffect, useRef, useState } from "react";
-import CardComponent from "./Card-Components";
-import LabelShadowComponent from "./Label-Shadow";
-import ProgressBarComponent from "./Progress-Component";
-import DropDownComponent from "./Dropdown-Component";
-import DProgressbarComponent from "./DProgressbar-component";
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import LinearProgress from "@mui/material/LinearProgress";
+import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
+import Tooltip from "@mui/material/Tooltip";
 
-import LinkIcon from "@mui/icons-material/Link";
+import LaunchIcon from "@mui/icons-material/Launch";
+import CodeIcon from "@mui/icons-material/Code";
+import StorageIcon from "@mui/icons-material/Storage";
+import BuildIcon from "@mui/icons-material/Build";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import LabelShadowComponent from "./Label-Shadow";
 
 import jsonData from "../Json/my.json";
 
-interface ILabel {
+interface SkillComponentProps {
   label: string;
   isDark: boolean;
 }
 
-const SkillComponent: React.FC<ILabel> = ({ label, isDark }) => {
-  const [subTitle, setSubTitle] = useState("");
-  const [subDetail, setDetail] = useState({ label: "", dic: "", url: "" });
+interface SkillItem {
+  name: string;
+  level: number;
+  description: string;
+  url: string;
+  category: "Frontend" | "Backend" | "Tools";
+}
 
+const SkillComponent: React.FC<SkillComponentProps> = ({ label, isDark }) => {
   const JData = jsonData.Discription;
 
-  const calculateYearsAndMonths = () => {
-    const currentDate: Date = new Date();
+  const calculateExperience = () => {
+    const currentDate = new Date();
+    const startDate = new Date("2021-04-01");
+    const differenceMs = currentDate.getTime() - startDate.getTime();
 
-    // Set the start date to April 2021
-    const startDate: Date = new Date("2021-04-01");
-
-    // Calculate the difference in milliseconds
-    const differenceMs: number = currentDate.getTime() - startDate.getTime();
-
-    // Convert the difference to years and months
-    const years: number = Math.floor(
-      differenceMs / (1000 * 60 * 60 * 24 * 365.25),
-    );
-    const months: number = Math.floor(
-      (differenceMs % (1000 * 60 * 60 * 24 * 365.25)) /
-      (1000 * 60 * 60 * 24 * 30.44),
+    const years = Math.floor(differenceMs / (1000 * 60 * 60 * 24 * 365.25));
+    const months = Math.floor(
+      (differenceMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44)
     );
 
     return { years, months };
   };
-  const { years, months } = calculateYearsAndMonths();
 
-  const arrFEData = [
-    <DProgressbarComponent
-      key="HTML"
-      label="HTML"
-      number={75}
-      outputValue={(e) => {
-        setSubTitle(e);
-        setDetail({
-          label: JData[1].label,
-          dic: JData[1].disc,
-          url: JData[1].url,
-        });
-      }}
-    />,
-    <DProgressbarComponent
-      key="CSS"
-      label="CSS"
-      number={75}
-      outputValue={(e) => {
-        setSubTitle(e);
-        setDetail({
-          label: JData[2].label,
-          dic: JData[2].disc,
-          url: JData[2].url,
-        });
-      }}
-    />,
-    <DProgressbarComponent
-      key="JS"
-      label="JS"
-      number={70}
-      outputValue={(e) => {
-        setSubTitle(e);
-        setDetail({
-          label: JData[0].label,
-          dic: JData[0].disc,
-          url: JData[0].url,
-        });
-      }}
-    />,
-    <DProgressbarComponent
-      key="ReactJs"
-      label="ReactJs"
-      number={65}
-      outputValue={(e) => {
-        setSubTitle(e);
-        setDetail({
-          label: JData[5].label,
-          dic: JData[5].disc,
-          url: JData[5].url,
-        });
-      }}
-    />,
-    <DProgressbarComponent
-      key="Angular"
-      label="Angular"
-      number={75}
-      outputValue={(e) => {
-        setSubTitle(e);
-        setDetail({
-          label: JData[6].label,
-          dic: JData[6].disc,
-          url: JData[6].url,
-        });
-      }}
-    />,
+  const { years, months } = calculateExperience();
+
+  const skills: SkillItem[] = [
+    {
+      name: "React.js",
+      level: 85,
+      description: JData[5]?.disc || "Declarative component-based UI library with hooks, context, and modern state architecture.",
+      url: JData[5]?.url || "https://react.dev",
+      category: "Frontend",
+    },
+    {
+      name: "JavaScript (ES6+)",
+      level: 80,
+      description: JData[0]?.disc || "Modern ECMAScript features, async/await, closures, and functional programming patterns.",
+      url: JData[0]?.url || "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      category: "Frontend",
+    },
+    {
+      name: "HTML5 & CSS3",
+      level: 90,
+      description: "Semantic web structuring, modern CSS grid, flexbox layouts, animations, and responsive UI design.",
+      url: "https://www.w3schools.com/html/",
+      category: "Frontend",
+    },
+    {
+      name: "Angular",
+      level: 70,
+      description: JData[6]?.disc || "Component architecture, dependency injection, RxJS observables, and TypeScript tooling.",
+      url: JData[6]?.url || "https://angular.io",
+      category: "Frontend",
+    },
+    {
+      name: "Node.js & Express",
+      level: 65,
+      description: JData[3]?.disc || "Server-side JavaScript runtime for building REST APIs, middleware, and microservices.",
+      url: JData[3]?.url || "https://nodejs.org",
+      category: "Backend",
+    },
+    {
+      name: "MongoDB",
+      level: 60,
+      description: JData[4]?.disc || "Document-oriented NoSQL database for flexible data modeling and aggregation pipelines.",
+      url: JData[4]?.url || "https://www.mongodb.com",
+      category: "Backend",
+    },
   ];
 
-  const arrBEData = [
-    <DProgressbarComponent
-      key="nodejs"
-      label="nodejs"
-      number={50}
-      outputValue={(e) => {
-        setSubTitle(e);
-        setDetail({
-          label: JData[3].label,
-          dic: JData[3].disc,
-          url: JData[3].url,
-        });
-      }}
-    />,
-    <DProgressbarComponent
-      key="mongodb"
-      label="mongodb"
-      number={25}
-      outputValue={(e) => {
-        setSubTitle(e);
-        setDetail({
-          label: JData[4].label,
-          dic: JData[4].disc,
-          url: JData[4].url,
-        });
-      }}
-    />,
-  ];
+  const [selectedSkill, setSelectedSkill] = useState<SkillItem>(skills[0]);
+  const [activeCategory, setActiveCategory] = useState<"All" | "Frontend" | "Backend">("All");
 
-  const frontEndPbar = (
-    <ProgressBarComponent percentage="72" pbLabel="Frontend" />
-  );
-
-  const backEndPbar = (
-    <ProgressBarComponent percentage="37.5" pbLabel="Backend" />
-  );
+  const filteredSkills = activeCategory === "All"
+    ? skills
+    : skills.filter((s) => s.category === activeCategory);
 
   return (
-    <div className="skill-container">
-      <LabelShadowComponent isDark={isDark} label={label} />
-      <div className="skill-description">
-        <div className="skill-disc-panel">
-          <div className="skill-summary">
-            I'm experienced frontend developer proficient with {years}.
-            {months + " "}
-            years of experience. Skilled in building responsive and dynamic web
-            applications, implementing complex UI features, and optimizing
-            performance. Strong understanding of modern web development
-            practices, including component-based architecture, state management,
-            and RESTful APIs. Passionate about delivering high-quality user
-            experiences and staying updated with the latest technologies.
-          </div>
-          <div className="skill-score"></div>
-          <div className="DD-cont">
-            <DropDownComponent arr={arrFEData} label={frontEndPbar} />
-            <DropDownComponent arr={arrBEData} label={backEndPbar} />
-          </div>
-        </div>
-        <div className="experience-container">
-          <div>
-            <span className="yexp">{years}</span>
-            <span className="dot">.</span>
-            <span className="mexp">{months + " "}</span>
-          </div>
-          <div>
-            <span className="skill-ye">Years experience</span>
-          </div>
-          {subTitle == "" ? (
-            ""
-          ) : (
-            <div className="sub-in-detail">
-              <div className="Exp-sub-card-title">
-                {subDetail.label}{" "}
-                <a href={subDetail.url} target="_blank">
-                  <LinkIcon />
-                </a>
-              </div>
-              <div className="Exp-sub-card-disc">{subDetail.dic}</div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+    <Box id="skills" sx={{ py: { xs: 3, md: 5 } }}>
+      <Card
+        sx={{
+          p: { xs: 2.5, sm: 3.5, md: 4.5 },
+          bgcolor: isDark ? "rgba(30, 41, 59, 0.7)" : "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(12px)",
+        }}
+      >
+        <LabelShadowComponent
+          isDark={isDark}
+          label={label}
+          subtitle="Technical skills, proficiency levels, and core engineering toolkit"
+        />
+
+        {/* Category Filter Chips */}
+        <Stack direction="row" spacing={1} sx={{ mb: 3.5, flexWrap: "wrap", gap: 1 }}>
+          {(["All", "Frontend", "Backend"] as const).map((cat) => (
+            <Chip
+              key={cat}
+              label={cat === "All" ? "All Skills" : `${cat} Stack`}
+              clickable
+              onClick={() => setActiveCategory(cat)}
+              color={activeCategory === cat ? "primary" : "default"}
+              variant={activeCategory === cat ? "filled" : "outlined"}
+              sx={{
+                fontWeight: 600,
+                fontSize: "0.85rem",
+                px: 1,
+              }}
+            />
+          ))}
+        </Stack>
+
+        <Grid container spacing={3.5}>
+          {/* Left Column: Skills List with Progress Bars */}
+          <Grid item xs={12} lg={7}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: isDark ? "#94a3b8" : "#64748b",
+                mb: 2.5,
+                lineHeight: 1.6,
+              }}
+            >
+              Click any skill below to inspect details, stack specifics, and official documentation:
+            </Typography>
+
+            <Stack spacing={2}>
+              {filteredSkills.map((skill) => {
+                const isSelected = selectedSkill.name === skill.name;
+                return (
+                  <Box
+                    key={skill.name}
+                    onClick={() => setSelectedSkill(skill)}
+                    sx={{
+                      p: 2,
+                      borderRadius: 2.5,
+                      cursor: "pointer",
+                      bgcolor: isSelected
+                        ? isDark
+                          ? "rgba(56, 189, 248, 0.12)"
+                          : "rgba(2, 132, 199, 0.08)"
+                        : isDark
+                          ? "rgba(15, 23, 42, 0.4)"
+                          : "rgba(241, 245, 249, 0.6)",
+                      border: isSelected
+                        ? "1.5px solid"
+                        : "1px solid",
+                      borderColor: isSelected
+                        ? "primary.main"
+                        : isDark
+                          ? "rgba(255, 255, 255, 0.05)"
+                          : "rgba(0, 0, 0, 0.04)",
+                      transition: "all 0.2s ease-in-out",
+                      "&:hover": {
+                        transform: "translateX(4px)",
+                        borderColor: "primary.main",
+                      },
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        mb: 1,
+                      }}
+                    >
+                      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <Typography
+                          variant="subtitle2"
+                          sx={{
+                            fontWeight: 700,
+                            color: isSelected
+                              ? "primary.main"
+                              : isDark
+                                ? "#f1f5f9"
+                                : "#0f172a",
+                          }}
+                        >
+                          {skill.name}
+                        </Typography>
+                        <Chip
+                          label={skill.category}
+                          size="small"
+                          sx={{
+                            height: 20,
+                            fontSize: "0.68rem",
+                            fontWeight: 600,
+                            bgcolor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.05)",
+                          }}
+                        />
+                      </Box>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          fontWeight: 700,
+                          color: "primary.main",
+                        }}
+                      >
+                        {skill.level}%
+                      </Typography>
+                    </Box>
+
+                    <LinearProgress
+                      variant="determinate"
+                      value={skill.level}
+                      sx={{
+                        height: 8,
+                        borderRadius: 4,
+                        bgcolor: isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.08)",
+                        "& .MuiLinearProgress-bar": {
+                          borderRadius: 4,
+                          background:
+                            skill.category === "Frontend"
+                              ? "linear-gradient(90deg, #38bdf8 0%, #0284c7 100%)"
+                              : "linear-gradient(90deg, #f472b6 0%, #db2777 100%)",
+                        },
+                      }}
+                    />
+                  </Box>
+                );
+              })}
+            </Stack>
+          </Grid>
+
+          {/* Right Column: Experience Metric Card & Selected Skill Inspector */}
+          <Grid item xs={12} lg={5}>
+            <Stack spacing={3}>
+              {/* Experience Stat Card */}
+              <Box
+                sx={{
+                  p: 3,
+                  borderRadius: 3,
+                  background: isDark
+                    ? "linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(168, 85, 247, 0.08) 100%)"
+                    : "linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(124, 58, 237, 0.06) 100%)",
+                  border: isDark
+                    ? "1px solid rgba(56, 189, 248, 0.2)"
+                    : "1px solid rgba(2, 132, 199, 0.2)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.8px",
+                      color: "primary.main",
+                    }}
+                  >
+                    Professional Experience
+                  </Typography>
+                  <Typography
+                    variant="h3"
+                    component="div"
+                    sx={{
+                      fontWeight: 800,
+                      color: isDark ? "#f1f5f9" : "#0f172a",
+                      my: 0.5,
+                    }}
+                  >
+                    {years}
+                    <Box component="span" sx={{ color: "primary.main", fontSize: "0.7em" }}>
+                      .{months}
+                    </Box>{" "}
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 600 }}>
+                      Years
+                    </Typography>
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: isDark ? "#94a3b8" : "#64748b" }}>
+                    Delivering production-grade frontend applications
+                  </Typography>
+                </Box>
+
+                <Avatar
+                  sx={{
+                    width: 56,
+                    height: 56,
+                    bgcolor: "primary.main",
+                    boxShadow: "0 8px 20px -4px rgba(56, 189, 248, 0.5)",
+                  }}
+                >
+                  <AutoAwesomeIcon sx={{ color: "#fff", fontSize: 28 }} />
+                </Avatar>
+              </Box>
+
+              {/* Selected Skill Inspector Card */}
+              {selectedSkill && (
+                <Box
+                  sx={{
+                    p: 3,
+                    borderRadius: 3,
+                    bgcolor: isDark ? "rgba(15, 23, 42, 0.5)" : "rgba(241, 245, 249, 0.7)",
+                    border: isDark
+                      ? "1px solid rgba(255, 255, 255, 0.08)"
+                      : "1px solid rgba(0, 0, 0, 0.06)",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      mb: 1.5,
+                    }}
+                  >
+                    <Typography variant="h6" fontWeight={700} color="primary.main">
+                      {selectedSkill.name}
+                    </Typography>
+                    <Button
+                      variant="text"
+                      size="small"
+                      href={selectedSkill.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      endIcon={<LaunchIcon sx={{ fontSize: "16px !important" }} />}
+                      sx={{ fontWeight: 600 }}
+                    >
+                      Docs
+                    </Button>
+                  </Box>
+
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: isDark ? "#cbd5e1" : "#475569",
+                      lineHeight: 1.65,
+                      mb: 2,
+                    }}
+                  >
+                    {selectedSkill.description}
+                  </Typography>
+
+                  <Divider sx={{ my: 1.5, opacity: 0.5 }} />
+
+                  <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <Typography variant="caption" sx={{ color: isDark ? "#94a3b8" : "#64748b" }}>
+                      Category: <strong>{selectedSkill.category}</strong>
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: "primary.main", fontWeight: 700 }}>
+                      Mastery: {selectedSkill.level}%
+                    </Typography>
+                  </Box>
+                </Box>
+              )}
+            </Stack>
+          </Grid>
+        </Grid>
+      </Card>
+    </Box>
   );
 };
 
