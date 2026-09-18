@@ -1,153 +1,135 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
 
 import LaunchIcon from "@mui/icons-material/Launch";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import VerifiedIcon from "@mui/icons-material/Verified";
 
-// React Icons for exact brand/technology SVG vectors
-import {
-  SiPython,
-  SiJavascript,
-  SiReact,
-  SiAngular,
-  SiNodedotjs,
-  SiMysql,
-  SiTryhackme,
-  SiHackerrank,
-  SiFreecodecamp,
-} from "react-icons/si";
-import { FaDatabase, FaShieldAlt, FaAward } from "react-icons/fa";
+// Vector Icons
+import { SiPython, SiJavascript, SiAngular, SiNodedotjs, SiMysql, SiReact, SiHackerrank, SiFreecodecamp, SiTryhackme, SiGo } from "react-icons/si";
+import { FaShieldAlt, FaAward, FaCode, FaServer, FaCubes } from "react-icons/fa";
 
 import LabelShadowComponent from "./Label-Shadow";
 
-interface IData {
-  [key: string]: any;
+interface IAchievement {
+  name: string;
+  url?: string;
+  icon?: string;
+  skills?: string[];
+  description?: string;
 }
 
 interface IAchievementProps {
-  data?: IData[];
   label: string;
   isDark: boolean;
+  data: IAchievement[];
 }
 
 const renderVectorIcon = (IconComponent: any, size: number, color: string) => {
   return React.createElement(IconComponent, { size, color });
 };
 
-const getCertIconData = (name: string, skills: string[] = []) => {
-  const lowerName = name.toLowerCase();
-  const lowerSkills = skills.map((s) => s.toLowerCase());
-
-  if (lowerName.includes("react") || lowerSkills.includes("reactjs") || lowerSkills.includes("react")) {
-    return {
-      icon: renderVectorIcon(SiReact, 26, "#61dafb"),
-      bg: "rgba(97, 218, 251, 0.12)",
-      border: "rgba(97, 218, 251, 0.3)",
-      glow: "rgba(97, 218, 251, 0.4)",
-    };
+// Group categories with their specific theme colors and icons
+const getCategoryMeta = (category: string) => {
+  switch (category) {
+    case "Python":
+      return {
+        icon: renderVectorIcon(SiPython, 28, "#3776ab"),
+        bg: "rgba(55, 118, 171, 0.12)",
+        border: "rgba(55, 118, 171, 0.3)",
+      };
+    case "JavaScript & React":
+      return {
+        icon: renderVectorIcon(SiJavascript, 26, "#f7df1e"),
+        bg: "rgba(247, 223, 30, 0.12)",
+        border: "rgba(247, 223, 30, 0.3)",
+      };
+    case "Angular":
+      return {
+        icon: renderVectorIcon(SiAngular, 28, "#dd0031"),
+        bg: "rgba(221, 0, 49, 0.12)",
+        border: "rgba(221, 0, 49, 0.3)",
+      };
+    case "Software Engineering & Problem Solving":
+      return {
+        icon: renderVectorIcon(FaCode, 26, "#38bdf8"),
+        bg: "rgba(56, 189, 248, 0.12)",
+        border: "rgba(56, 189, 248, 0.3)",
+      };
+    case "Databases":
+      return {
+        icon: renderVectorIcon(SiMysql, 30, "#4479a1"),
+        bg: "rgba(68, 121, 161, 0.12)",
+        border: "rgba(68, 121, 161, 0.3)",
+      };
+    case "Cyber Security":
+      return {
+        icon: renderVectorIcon(FaShieldAlt, 24, "#22c55e"),
+        bg: "rgba(34, 197, 94, 0.12)",
+        border: "rgba(34, 197, 94, 0.3)",
+      };
+    default:
+      return {
+        icon: renderVectorIcon(FaAward, 26, "#8b5cf6"),
+        bg: "rgba(139, 92, 246, 0.12)",
+        border: "rgba(139, 92, 246, 0.3)",
+      };
   }
-
-  if (lowerName.includes("python") || lowerSkills.includes("python")) {
-    return {
-      icon: renderVectorIcon(SiPython, 26, "#38bdf8"),
-      bg: "rgba(56, 189, 248, 0.12)",
-      border: "rgba(56, 189, 248, 0.3)",
-      glow: "rgba(56, 189, 248, 0.4)",
-    };
-  }
-
-  if (lowerName.includes("cyber security") || lowerSkills.includes("cyber security")) {
-    return {
-      icon: renderVectorIcon(FaShieldAlt, 24, "#10b981"),
-      bg: "rgba(16, 185, 129, 0.12)",
-      border: "rgba(16, 185, 129, 0.3)",
-      glow: "rgba(16, 185, 129, 0.4)",
-    };
-  }
-
-  if (lowerName.includes("sql") || lowerSkills.includes("sql")) {
-    return {
-      icon: renderVectorIcon(SiMysql, 28, "#0284c7"),
-      bg: "rgba(2, 132, 199, 0.12)",
-      border: "rgba(2, 132, 199, 0.3)",
-      glow: "rgba(2, 132, 199, 0.4)",
-    };
-  }
-
-  if (lowerName.includes("angular") || lowerSkills.includes("angular")) {
-    return {
-      icon: renderVectorIcon(SiAngular, 26, "#dd0031"),
-      bg: "rgba(221, 0, 49, 0.12)",
-      border: "rgba(221, 0, 49, 0.3)",
-      glow: "rgba(221, 0, 49, 0.4)",
-    };
-  }
-
-  if (lowerName.includes("node") || lowerSkills.includes("nodejs")) {
-    return {
-      icon: renderVectorIcon(SiNodedotjs, 26, "#22c55e"),
-      bg: "rgba(34, 197, 94, 0.12)",
-      border: "rgba(34, 197, 94, 0.3)",
-      glow: "rgba(34, 197, 94, 0.4)",
-    };
-  }
-
-  if (lowerName.includes("javascript") || lowerSkills.includes("javascript")) {
-    return {
-      icon: renderVectorIcon(SiJavascript, 24, "#f7df1e"),
-      bg: "rgba(247, 223, 30, 0.12)",
-      border: "rgba(247, 223, 30, 0.3)",
-      glow: "rgba(247, 223, 30, 0.4)",
-    };
-  }
-
-  return {
-    icon: renderVectorIcon(FaAward, 24, "#38bdf8"),
-    bg: "rgba(56, 189, 248, 0.12)",
-    border: "rgba(56, 189, 248, 0.3)",
-    glow: "rgba(56, 189, 248, 0.4)",
-  };
 };
 
 const getPlatformBadge = (url: string = "") => {
   if (url.includes("hackerrank")) {
-    return {
-      name: "HackerRank",
-      icon: renderVectorIcon(SiHackerrank, 13, "#2ec866"),
-      color: "#2ec866",
-    };
+    return { name: "HackerRank", icon: renderVectorIcon(SiHackerrank, 13, "#2ec866"), color: "#2ec866" };
   }
   if (url.includes("freecodecamp")) {
-    return {
-      name: "freeCodeCamp",
-      icon: renderVectorIcon(SiFreecodecamp, 13, "#a855f7"),
-      color: "#a855f7",
-    };
+    return { name: "freeCodeCamp", icon: renderVectorIcon(SiFreecodecamp, 13, "#a855f7"), color: "#a855f7" };
   }
   if (url.includes("tryhackme")) {
-    return {
-      name: "TryHackMe",
-      icon: renderVectorIcon(SiTryhackme, 13, "#ef4444"),
-      color: "#ef4444",
-    };
+    return { name: "TryHackMe", icon: renderVectorIcon(SiTryhackme, 13, "#ef4444"), color: "#ef4444" };
   }
-  return {
-    name: "Verified",
-    icon: <VerifiedIcon sx={{ fontSize: 13, color: "primary.main" }} />,
-    color: "#38bdf8",
-  };
+  return { name: "Verified", icon: <VerifiedIcon sx={{ fontSize: 13, color: "primary.main" }} />, color: "#38bdf8" };
 };
 
 const AchivementdsComponent: React.FC<IAchievementProps> = ({ data = [], isDark, label }) => {
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+  const groupedData = useMemo(() => {
+    const groups: Record<string, IAchievement[]> = {};
+
+    data.forEach((cert) => {
+      let category = "Other";
+      const nameLower = cert.name.toLowerCase();
+      
+      if (nameLower.includes("python")) category = "Python";
+      else if (nameLower.includes("angular")) category = "Angular";
+      else if (nameLower.includes("javascript") || nameLower.includes("react") || nameLower.includes("node")) category = "JavaScript & React";
+      else if (nameLower.includes("sql") || nameLower.includes("database")) category = "Databases";
+      else if (nameLower.includes("cyber security") || nameLower.includes("cyber")) category = "Cyber Security";
+      else if (nameLower.includes("problem solving") || nameLower.includes("software engineer") || nameLower.includes("rest api") || nameLower.includes("go")) category = "Software Engineering & Problem Solving";
+
+      if (!groups[category]) groups[category] = [];
+      groups[category].push(cert);
+    });
+
+    // Sort categories (you can customize order if you like)
+    return Object.entries(groups).sort(([catA], [catB]) => catA.localeCompare(catB));
+  }, [data]);
+
+  const toggleExpand = (category: string) => {
+    setExpandedCategory(expandedCategory === category ? null : category);
+  };
+
   return (
     <Box id="certifications" sx={{ py: { xs: 3, md: 5 } }}>
       <Card
@@ -163,152 +145,217 @@ const AchivementdsComponent: React.FC<IAchievementProps> = ({ data = [], isDark,
           subtitle="Verified technical assessments, professional accreditations, and engineering certificates"
         />
 
-        <Grid container spacing={3}>
-          {data.map((cert, index) => {
-            const iconData = getCertIconData(cert.name, cert.skills);
-            const platform = getPlatformBadge(cert.url);
+        <Stack spacing={2.5}>
+          {groupedData.map(([category, certs]) => {
+            const isExpanded = expandedCategory === category;
+            const meta = getCategoryMeta(category);
 
             return (
-              <Grid item xs={12} sm={6} lg={4} key={cert.name || index}>
-                <Card
+              <Box
+                key={category}
+                sx={{
+                  borderRadius: 3,
+                  bgcolor: isDark ? "rgba(15, 23, 42, 0.5)" : "rgba(241, 245, 249, 0.75)",
+                  border: isDark
+                    ? "1px solid rgba(255, 255, 255, 0.08)"
+                    : "1px solid rgba(0, 0, 0, 0.06)",
+                  overflow: "hidden",
+                  transition: "all 0.25s ease",
+                  "&:hover": {
+                    borderColor: "primary.main",
+                    boxShadow: isDark
+                      ? "0 10px 28px -10px rgba(56, 189, 248, 0.2)"
+                      : "0 10px 28px -10px rgba(2, 132, 199, 0.15)",
+                  },
+                }}
+              >
+                {/* Accordion Header */}
+                <Box
+                  onClick={() => toggleExpand(category)}
                   sx={{
-                    height: "100%",
+                    p: { xs: 2, sm: 2.5 },
                     display: "flex",
-                    flexDirection: "column",
+                    flexDirection: { xs: "column", sm: "row" },
                     justifyContent: "space-between",
-                    bgcolor: isDark ? "rgba(15, 23, 42, 0.55)" : "rgba(241, 245, 249, 0.75)",
-                    border: isDark
-                      ? "1px solid rgba(255, 255, 255, 0.08)"
-                      : "1px solid rgba(0, 0, 0, 0.06)",
-                    borderRadius: 3,
-                    backdropFilter: "blur(8px)",
-                    transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
+                    alignItems: { xs: "flex-start", sm: "center" },
+                    gap: 2,
+                    cursor: "pointer",
                     "&:hover": {
-                      transform: "translateY(-6px)",
-                      borderColor: "primary.main",
-                      boxShadow: isDark
-                        ? `0 14px 30px -8px ${iconData.glow}`
-                        : "0 14px 30px -8px rgba(2, 132, 199, 0.2)",
+                      bgcolor: isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(0, 0, 0, 0.02)",
                     },
                   }}
                 >
-                  <CardContent sx={{ p: 2.5, pb: 1.5 }}>
-                    {/* Top Header: Vector Icon Avatar + Platform Badge */}
-                    <Box
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Avatar
                       sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mb: 2.2,
+                        width: 50,
+                        height: 50,
+                        bgcolor: meta.bg,
+                        border: `1.5px solid ${meta.border}`,
+                        boxShadow: `0 4px 14px 0 ${meta.bg}`,
                       }}
                     >
-                      <Avatar
+                      {meta.icon}
+                    </Avatar>
+                    <Box>
+                      <Typography
+                        variant="subtitle1"
                         sx={{
-                          width: 50,
-                          height: 50,
-                          bgcolor: iconData.bg,
-                          border: `1.5px solid ${iconData.border}`,
-                          boxShadow: `0 4px 14px 0 ${iconData.bg}`,
+                          fontWeight: 700,
+                          color: isDark ? "#f8fafc" : "#0f172a",
+                          lineHeight: 1.2,
+                          fontSize: "1.1rem",
                         }}
                       >
-                        {iconData.icon}
-                      </Avatar>
-
-                      <Chip
-                        icon={platform.icon}
-                        label={platform.name}
-                        size="small"
+                        {category}
+                      </Typography>
+                      <Typography
+                        variant="caption"
                         sx={{
-                          height: 24,
-                          fontSize: "0.74rem",
-                          fontWeight: 700,
-                          bgcolor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.04)",
-                          color: platform.color,
-                          border: isDark
-                            ? "1px solid rgba(255, 255, 255, 0.08)"
-                            : "1px solid rgba(0, 0, 0, 0.06)",
+                          color: isDark ? "#cbd5e1" : "#475569",
+                          display: "block",
+                          mt: 0.3,
+                          fontWeight: 500,
                         }}
-                      />
+                      >
+                        {certs.length} {certs.length === 1 ? "Certificate" : "Certificates"}
+                      </Typography>
                     </Box>
+                  </Box>
 
-                    {/* Certificate Title */}
-                    <Typography
-                      variant="h6"
-                      component="h3"
-                      sx={{
-                        fontWeight: 700,
-                        fontSize: "1.08rem",
-                        color: isDark ? "#f8fafc" : "#0f172a",
-                        lineHeight: 1.35,
-                        mb: 1.2,
-                      }}
-                    >
-                      {cert.name}
-                    </Typography>
+                  <IconButton size="small" sx={{ color: isDark ? "#cbd5e1" : "#475569", ml: { xs: 0, sm: "auto" } }}>
+                    {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  </IconButton>
+                </Box>
 
-                    {/* Description */}
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: isDark ? "#94a3b8" : "#64748b",
-                        lineHeight: 1.6,
-                        fontSize: "0.86rem",
-                        mb: 2.2,
-                        minHeight: "42px",
-                      }}
-                    >
-                      {cert.description}
-                    </Typography>
-
-                    {/* Skill Tags */}
-                    {cert.skills && (
-                      <Stack direction="row" spacing={0.8} sx={{ flexWrap: "wrap", gap: 0.8 }}>
-                        {cert.skills.map((skill: string, idx: number) => (
-                          <Chip
+                {/* Accordion Body */}
+                <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+                  <Box
+                    sx={{
+                      p: { xs: 2, sm: 2.5 },
+                      pt: { xs: 0, sm: 0 },
+                      borderTop: isDark
+                        ? "1px solid rgba(255, 255, 255, 0.05)"
+                        : "1px solid rgba(0, 0, 0, 0.04)",
+                      bgcolor: isDark ? "rgba(0, 0, 0, 0.2)" : "rgba(0, 0, 0, 0.02)",
+                    }}
+                  >
+                    <Stack spacing={2} sx={{ mt: 2 }}>
+                      {certs.map((cert, idx) => {
+                        const platform = getPlatformBadge(cert.url);
+                        return (
+                          <Box
                             key={idx}
-                            label={skill}
-                            size="small"
                             sx={{
-                              height: 22,
-                              fontSize: "0.72rem",
-                              fontWeight: 600,
-                              bgcolor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.05)",
-                              color: isDark ? "#cbd5e1" : "#475569",
+                              p: 2,
+                              borderRadius: 2.5,
+                              bgcolor: isDark ? "rgba(15, 23, 42, 0.45)" : "rgba(255, 255, 255, 0.9)",
+                              border: isDark
+                                ? "1px solid rgba(255, 255, 255, 0.06)"
+                                : "1px solid rgba(0, 0, 0, 0.05)",
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: 1.5,
+                              transition: "all 0.2s ease",
+                              "&:hover": {
+                                borderColor: "primary.main",
+                                transform: "translateX(4px)",
+                              },
                             }}
-                          />
-                        ))}
-                      </Stack>
-                    )}
-                  </CardContent>
+                          >
+                            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 1.5 }}>
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  fontWeight: 700,
+                                  color: isDark ? "#f1f5f9" : "#0f172a",
+                                  lineHeight: 1.4,
+                                }}
+                              >
+                                {cert.name}
+                              </Typography>
 
-                  {/* Footer Action: Verify Direct Link */}
-                  <CardActions sx={{ p: 2.5, pt: 0.5 }}>
-                    <Button
-                      variant="text"
-                      size="small"
-                      href={cert.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      endIcon={<LaunchIcon sx={{ fontSize: "16px !important" }} />}
-                      sx={{
-                        fontWeight: 700,
-                        fontSize: "0.85rem",
-                        color: "primary.main",
-                        p: 0,
-                        "&:hover": {
-                          bgcolor: "transparent",
-                          textDecoration: "underline",
-                        },
-                      }}
-                    >
-                      Verify Credential
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
+                              <Chip
+                                icon={platform.icon}
+                                label={platform.name}
+                                size="small"
+                                sx={{
+                                  height: 24,
+                                  fontSize: "0.7rem",
+                                  fontWeight: 700,
+                                  bgcolor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.04)",
+                                  color: platform.color,
+                                  border: isDark
+                                    ? "1px solid rgba(255, 255, 255, 0.08)"
+                                    : "1px solid rgba(0, 0, 0, 0.06)",
+                                }}
+                              />
+                            </Box>
+
+                            <Typography
+                              variant="body2"
+                              sx={{
+                                color: isDark ? "#94a3b8" : "#64748b",
+                                lineHeight: 1.5,
+                                fontSize: "0.88rem",
+                              }}
+                            >
+                              {cert.description}
+                            </Typography>
+
+                            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 1.5, mt: 0.5 }}>
+                              {cert.skills && cert.skills.length > 0 && (
+                                <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", gap: 1 }}>
+                                  {cert.skills.map((skill, sIdx) => (
+                                    <Chip
+                                      key={sIdx}
+                                      label={skill}
+                                      size="small"
+                                      sx={{
+                                        height: 22,
+                                        fontSize: "0.72rem",
+                                        fontWeight: 600,
+                                        bgcolor: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)",
+                                        color: isDark ? "#cbd5e1" : "#475569",
+                                      }}
+                                    />
+                                  ))}
+                                </Stack>
+                              )}
+
+                              <Button
+                                component="a"
+                                variant="text"
+                                size="small"
+                                href={cert.url || "#"}
+                                target="_blank"
+                                rel="noreferrer"
+                                endIcon={<LaunchIcon sx={{ fontSize: "14px !important" }} />}
+                                sx={{
+                                  fontWeight: 700,
+                                  fontSize: "0.8rem",
+                                  color: "primary.main",
+                                  p: 0,
+                                  minWidth: "auto",
+                                  "&:hover": {
+                                    bgcolor: "transparent",
+                                    textDecoration: "underline",
+                                  },
+                                }}
+                              >
+                                View Certificate
+                              </Button>
+                            </Box>
+                          </Box>
+                        );
+                      })}
+                    </Stack>
+                  </Box>
+                </Collapse>
+              </Box>
             );
           })}
-        </Grid>
+        </Stack>
       </Card>
     </Box>
   );

@@ -94,7 +94,7 @@
   "ResumePath": "./src/utility/files/18JAN24.pdf",
   "Achievement": [
     {
-      "name": "Python basic",
+      "name": "Python (Basic)",
       "url": "https://www.hackerrank.com/certificates/c6933ce56d55",
       "icon": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
       "skills": [
@@ -121,7 +121,7 @@
       "description": "Introduction to cybersecurity: Protecting digital systems from unauthorized access."
     },
     {
-      "name": "Javascript basic",
+      "name": "JavaScript (Basic)",
       "url": "https://www.hackerrank.com/certificates/8c20a8facb9b",
       "icon": "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
       "skills": [
@@ -130,7 +130,7 @@
       "description": "JavaScript is a versatile, dynamic, interpreted programming language."
     },
     {
-      "name": "SQL basic",
+      "name": "SQL (Basic)",
       "url": "https://www.hackerrank.com/certificates/f78640064628",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
       "skills": [
@@ -139,7 +139,7 @@
       "description": "JavaScript is a versatile, dynamic, interpreted programming language."
     },
     {
-      "name": "Angular basic",
+      "name": "Angular (Basic)",
       "url": "https://www.hackerrank.com/certificates/b95a1d0b2491",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
       "skills": [
@@ -149,16 +149,17 @@
       "description": "Angular is a TypeScript-based framework for building web applications."
     },
     {
-      "name": "Nodejs basic",
+      "name": "Node (Basic)",
       "url": "https://www.hackerrank.com/certificates/cb08d6d7d40e",
       "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
       "skills": [
-        "Javascript, nodejs"
+        "JavaScript",
+        "Node.js"
       ],
       "description": "Node.js is a JavaScript runtime built on Chrome's V8 engine."
     },
     {
-      "name": "Javascript intermidiate",
+      "name": "JavaScript (Intermediate)",
       "url": "https://www.hackerrank.com/certificates/e72f10e5e062",
       "icon": "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
       "skills": [
@@ -177,6 +178,62 @@
         "reactJs"
       ],
       "description": "React is a JavaScript library for building user interfaces efficiently."
+    },
+    {
+      "name": "Problem Solving (Basic)",
+      "url": "https://www.hackerrank.com/R1Sh0315",
+      "icon": "",
+      "skills": [
+        "Problem Solving"
+      ],
+      "description": "Covers basic topics of Data Structures and Algorithms."
+    },
+    {
+      "name": "Problem Solving (Intermediate)",
+      "url": "https://www.hackerrank.com/R1Sh0315",
+      "icon": "",
+      "skills": [
+        "Problem Solving"
+      ],
+      "description": "Covers intermediate topics of Data Structures and Algorithms."
+    },
+    {
+      "name": "Software Engineer",
+      "url": "https://www.hackerrank.com/R1Sh0315",
+      "icon": "",
+      "skills": [
+        "Software Engineering"
+      ],
+      "description": "Demonstrates core software engineering principles and practices."
+    },
+    {
+      "name": "Angular (Intermediate)",
+      "url": "https://www.hackerrank.com/R1Sh0315",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
+      "skills": [
+        "Angular",
+        "Typescript"
+      ],
+      "description": "Advanced Angular concepts including routing, state management, and complex components."
+    },
+    {
+      "name": "Rest API (Intermediate)",
+      "url": "https://www.hackerrank.com/R1Sh0315",
+      "icon": "",
+      "skills": [
+        "REST API",
+        "Backend"
+      ],
+      "description": "Building and consuming RESTful APIs with advanced concepts."
+    },
+    {
+      "name": "Go (Basic)",
+      "url": "https://www.hackerrank.com/R1Sh0315",
+      "icon": "",
+      "skills": [
+        "Go"
+      ],
+      "description": "Basic programming concepts and syntax in Go (Golang)."
     }
   ],
   "Projects": [
