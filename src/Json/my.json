@@ -241,7 +241,7 @@
       "name": "Fin-Sight",
       "description": "An AI-powered financial market intelligence platform featuring real-time data analysis, stock screening, intelligent forecasting, and portfolio planning.",
       "icon": "",
-      "link": "",
+      "link": "https://fin-sight-web-gold.vercel.app/",
       "skills": [
         "TypeScript",
         "React",
