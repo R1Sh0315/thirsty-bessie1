@@ -238,18 +238,19 @@
   ],
   "Projects": [
     {
-      "name": "Pet Info",
-      "description": "Create a website showcasing dog breeds categorized by type and country. With help of React",
+      "name": "Fin-Sight",
+      "description": "An AI-powered financial market intelligence platform featuring real-time data analysis, stock screening, intelligent forecasting, and portfolio planning.",
       "icon": "",
-      "link": "https://csb-w929yu-43ygiwe4w-r1sh0315.vercel.app/",
+      "link": "",
       "skills": [
-        "HTML",
-        "CSS",
-        "Javascript",
-        "react"
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "AI Integration"
       ],
       "figma": "",
-      "gitLink": "https://github.com/R1Sh0315/pet-info"
+      "gitLink": "https://github.com/R1Sh0315/FinSight"
     },
     {
       "name": "Postal Index number data",
